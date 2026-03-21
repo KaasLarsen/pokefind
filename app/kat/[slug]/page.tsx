@@ -234,9 +234,9 @@ export default function CategoryPage({
             }
           />
           <ul className="mt-4 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
-            {feedProducts.map((p) => (
+            {feedProducts.map((p, i) => (
               <li key={p.id}>
-                <ProductCard product={p} />
+                <ProductCard product={p} imagePriority={i === 0} />
               </li>
             ))}
           </ul>

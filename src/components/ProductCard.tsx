@@ -1,27 +1,33 @@
 import type { ProductRecord } from "../lib/productTypes";
 import { IconPackage } from "./icons";
+import { ProductCardImage } from "./ProductCardImage";
 
-export default function ProductCard({ product }: { product: ProductRecord }) {
+type Props = {
+  product: ProductRecord;
+  /** Sæt på første synlige kort for hurtigere LCP */
+  imagePriority?: boolean;
+};
+
+export default function ProductCard({ product, imagePriority = false }: Props) {
   return (
     <article className="pk-card group flex h-full flex-col transition duration-300 hover:-translate-y-1 hover:no-underline hover:shadow-2xl hover:shadow-pk-navy/20">
       <div className="pk-card-inner flex flex-1 flex-col space-y-3 pb-5 pt-5">
-        <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-pk-blue/10 bg-gradient-to-br from-pk-cream to-white ring-1 ring-black/[0.04]">
-          {product.imageUrl ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
-              src={product.imageUrl}
-              alt={product.title}
-              className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
-            />
-          ) : (
+        {product.imageUrl ? (
+          <ProductCardImage
+            src={product.imageUrl}
+            alt={product.title}
+            priority={imagePriority}
+          />
+        ) : (
+          <div className="relative aspect-square w-full overflow-hidden rounded-2xl border border-pk-blue/10 bg-gradient-to-br from-pk-cream to-white ring-1 ring-black/[0.04]">
             <div className="flex h-full w-full flex-col items-center justify-center gap-2 text-pk-navy/35">
               <IconPackage className="h-14 w-14" />
               <span className="text-xs font-semibold uppercase tracking-wider">
                 Produktbillede
               </span>
             </div>
-          )}
-        </div>
+          </div>
+        )}
 
         <div className="text-xs text-pk-navy/60">
           <span className="rounded-md bg-pk-yellow/90 px-2 py-1 font-semibold text-pk-navy">

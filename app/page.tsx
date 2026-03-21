@@ -43,9 +43,9 @@ export default function HomePage() {
           </Link>
         </div>
         <ul className="mt-2 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
-          {featured.map((p) => (
+          {featured.map((p, i) => (
             <li key={p.id}>
-              <ProductCard product={p} />
+              <ProductCard product={p} imagePriority={i === 0} />
             </li>
           ))}
         </ul>

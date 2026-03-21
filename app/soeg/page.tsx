@@ -64,9 +64,9 @@ export default function SearchPage({
               Populære produkter lige nu
             </h2>
             <ul className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-              {featuredEmpty.map((p) => (
+              {featuredEmpty.map((p, i) => (
                 <li key={p.id}>
-                  <ProductCard product={p} />
+                  <ProductCard product={p} imagePriority={i === 0} />
                 </li>
               ))}
             </ul>
@@ -139,9 +139,9 @@ export default function SearchPage({
               </p>
             ) : (
               <ul className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-                {products.map((p) => (
+                {products.map((p, i) => (
                   <li key={p.id}>
-                    <ProductCard product={p} />
+                    <ProductCard product={p} imagePriority={i === 0} />
                   </li>
                 ))}
               </ul>
