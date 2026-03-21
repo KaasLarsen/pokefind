@@ -1,8 +1,8 @@
 import type { MetadataRoute } from "next";
 import { categories, guides } from "../src/lib/content";
+import { siteUrl } from "../src/lib/site";
 
-/** Matcher metadataBase i layout.tsx */
-const base = "https://pokefind.dk";
+const base = siteUrl;
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();

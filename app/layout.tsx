@@ -6,6 +6,7 @@ import CookieConsentBanner from "../src/components/CookieConsentBanner";
 import ClickAnalytics from "../src/components/ClickAnalytics";
 import SiteHeader from "../src/components/SiteHeader";
 import { PokeFindLogo } from "../src/components/PokeFindLogo";
+import { siteUrl } from "../src/lib/site";
 
 const fontSans = Nunito({
   subsets: ["latin"],
@@ -32,7 +33,7 @@ export const metadata: Metadata = {
     title: "PokéFind — Danmarks Pokémon-købsguide",
     description:
       "Kuratér Pokémon TCG og tilbehør med søgning, kategorier og guides til danske købere. Reklamelinks markeres tydeligt.",
-    url: "https://pokefind.dk",
+    url: siteUrl,
     siteName: "PokéFind",
     locale: "da_DK",
     type: "website",

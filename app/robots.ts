@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { siteUrl } from "../src/lib/site";
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -7,6 +8,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: ["/debug/"],
     },
-    sitemap: "https://pokefind.dk/sitemap.xml",
+    sitemap: `${siteUrl}/sitemap.xml`,
   };
 }
