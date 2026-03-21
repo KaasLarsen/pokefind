@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Nunito, Fredoka } from "next/font/google";
 import { Suspense } from "react";
 import "./globals.css";
@@ -19,6 +19,11 @@ const fontDisplay = Fredoka({
   variable: "--font-display",
   display: "swap",
 });
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://pokefind.dk"),
@@ -71,18 +76,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="da" className={`${fontSans.variable} ${fontDisplay.variable}`}>
-      <body className="min-h-screen font-sans text-pk-navy antialiased">
-        <div className="flex min-h-screen flex-col">
+      <body className="min-h-screen min-w-0 overflow-x-hidden font-sans text-pk-navy antialiased">
+        <div className="flex min-h-screen min-w-0 flex-col overflow-x-hidden">
           <Suspense fallback={<HeaderFallback />}>
             <SiteHeader />
           </Suspense>
 
-          <main className="flex-1 px-4 py-8">
-            <div className="mx-auto max-w-6xl">{children}</div>
+          <main className="min-w-0 flex-1 overflow-x-hidden px-4 py-8">
+            <div className="mx-auto max-w-6xl min-w-0">{children}</div>
           </main>
 
-          <footer className="mt-auto border-t border-pk-navy/10 bg-pk-navy text-white/90">
-            <div className="mx-auto max-w-6xl px-4 py-8 text-sm">
+          <footer className="mt-auto min-w-0 overflow-x-hidden border-t border-pk-navy/10 bg-pk-navy text-white/90">
+            <div className="mx-auto min-w-0 max-w-6xl px-4 py-8 text-sm">
               <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
                 <div className="flex gap-3">
                   <PokeFindLogo variant="mark" className="h-10 w-10 shrink-0" />

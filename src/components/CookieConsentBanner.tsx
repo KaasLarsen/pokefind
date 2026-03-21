@@ -28,7 +28,7 @@ export default function CookieConsentBanner() {
   return (
     <div
       id={bannerId}
-      className="fixed inset-x-0 bottom-0 z-50 border-t border-pk-navy/20 bg-pk-navy p-4 text-white shadow-2xl"
+      className="fixed inset-x-0 bottom-0 z-50 overflow-x-hidden border-t border-pk-navy/20 bg-pk-navy p-4 text-white shadow-2xl"
       role="dialog"
       aria-modal="false"
       aria-label="Cookievalg"

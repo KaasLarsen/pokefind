@@ -12,8 +12,8 @@ export default function SiteHeader() {
     pathname === "/soeg" ? (searchParams.get("q") ?? "") : "";
 
   return (
-    <header className="sticky top-0 z-40 border-b border-white/10 bg-gradient-to-r from-pk-ink via-pk-navy to-pk-blue shadow-xl shadow-pk-navy/30">
-      <div className="mx-auto flex max-w-6xl flex-col gap-5 px-4 py-4 lg:flex-row lg:items-center lg:justify-between lg:gap-6">
+    <header className="sticky top-0 z-40 overflow-x-hidden border-b border-white/10 bg-gradient-to-r from-pk-ink via-pk-navy to-pk-blue shadow-xl shadow-pk-navy/30">
+      <div className="mx-auto flex min-w-0 max-w-6xl flex-col gap-5 px-4 py-4 lg:flex-row lg:items-center lg:justify-between lg:gap-6">
         <Link
           href="/"
           className="group flex shrink-0 items-center transition hover:opacity-95"
