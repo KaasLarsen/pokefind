@@ -19,10 +19,10 @@ export default function ProductCard({ product, imagePriority = false }: Props) {
             priority={imagePriority}
           />
         ) : (
-          <div className="relative aspect-square w-full overflow-hidden rounded-2xl border border-pk-blue/10 bg-gradient-to-br from-pk-cream to-white ring-1 ring-black/[0.04]">
-            <div className="flex h-full w-full flex-col items-center justify-center gap-2 text-pk-navy/35">
-              <IconPackage className="h-14 w-14" />
-              <span className="text-xs font-semibold uppercase tracking-wider">
+          <div className="relative mx-auto flex h-40 w-full max-w-full items-center justify-center overflow-hidden rounded-2xl border border-pk-blue/10 bg-gradient-to-br from-pk-cream to-white ring-1 ring-black/[0.04] sm:h-44 md:aspect-[4/3] md:h-auto md:min-h-[10.5rem] md:max-h-[13.5rem] lg:max-h-[15rem]">
+            <div className="flex flex-col items-center justify-center gap-2 px-2 text-pk-navy/35">
+              <IconPackage className="h-12 w-12 sm:h-14 sm:w-14" />
+              <span className="text-center text-xs font-semibold uppercase tracking-wider">
                 Produktbillede
               </span>
             </div>
@@ -43,7 +43,7 @@ export default function ProductCard({ product, imagePriority = false }: Props) {
           data-track="affiliate_click"
           data-category-slug="product-feed"
           data-provider-id={product.feedSource}
-          className="text-base font-bold leading-snug text-pk-navy underline decoration-pk-yellow/70 underline-offset-4 hover:text-pk-blue"
+          className="break-words text-base font-bold leading-snug text-pk-navy underline decoration-pk-yellow/70 underline-offset-4 hover:text-pk-blue"
         >
           {product.title}
         </a>
