@@ -38,8 +38,41 @@ export function getFeaturedProducts(limit = 8): ProductRecord[] {
   return out;
 }
 
+/**
+ * Tjek om et produkt plausibelt hører til kategorien (feed-tekst vs. kategori-nøgleord).
+ */
+function productMatchesCategoryScope(p: ProductRecord, category: Category): boolean {
+  const hay = normalize(
+    `${p.title} ${p.description} ${p.merchant} ${p.feedSource}`,
+  );
+  const needles = [
+    ...category.searchKeywords,
+    category.slug.replace(/-/g, " "),
+    category.title,
+  ];
+  return needles.some((n) => {
+    const k = normalize(n);
+    return k.length >= 2 && hay.includes(k);
+  });
+}
+
 /** Produkter der matcher en kategori ud fra dens søgeord (feed-data). */
-export function getProductsForCategory(category: Category, limit = 12): ProductRecord[] {
+export function getProductsForCategory(
+  category: Category,
+  limit = 12,
+  /** Ekstra fritekst fra kategori-siden (?q=) — søger i hele kataloget og filtrerer/fallback. */
+  extraQuery?: string,
+): ProductRecord[] {
+  const userQ = extraQuery?.trim();
+
+  if (userQ) {
+    const wide = searchProducts(userQ, Math.max(limit * 4, 48));
+    const scoped = wide.filter((p) => productMatchesCategoryScope(p, category));
+    if (scoped.length > 0) return scoped.slice(0, limit);
+    /* Ingen træf der også rammer kategori-nøgleord — vis alligevel søgeresultater (brugeren bad om et ord) */
+    return wide.slice(0, limit);
+  }
+
   const queries = [
     ...category.searchKeywords,
     category.slug.replace(/-/g, " "),

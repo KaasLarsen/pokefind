@@ -52,6 +52,9 @@ export function generateStaticParams() {
   return categories.map((c) => ({ slug: c.slug }));
 }
 
+/** Så ?q=… / filtre altid læses på serveren (ellers kan statisk HTML ignorere query) */
+export const dynamic = "force-dynamic";
+
 export default function CategoryPage({
   params,
   searchParams,
@@ -77,9 +80,9 @@ export default function CategoryPage({
     q,
   });
 
-  const feedProducts = getProductsForCategory(category, 12);
+  const feedProducts = getProductsForCategory(category, 12, q);
   const searchDeepLink = `/soeg?q=${encodeURIComponent(
-    category.searchKeywords[0] ?? category.title,
+    (q && q.trim()) || category.searchKeywords[0] || category.title,
   )}`;
 
   return (
@@ -212,12 +215,23 @@ export default function CategoryPage({
           <SectionTitle
             kicker="Fra kataloget"
             title={
-              <>
-                Varer der matcher{" "}
-                <span className="text-pk-blue">{category.title}</span>
-              </>
+              q ? (
+                <>
+                  Resultater for &quot;{q}&quot; under{" "}
+                  <span className="text-pk-blue">{category.title}</span>
+                </>
+              ) : (
+                <>
+                  Varer der matcher{" "}
+                  <span className="text-pk-blue">{category.title}</span>
+                </>
+              )
             }
-            subtitle="Udvalgt ud fra varekataloget. Markerede links kan være betalt reklame."
+            subtitle={
+              q
+                ? "Søgning i varekataloget ud fra dit søgeord. Markerede links kan være betalt reklame."
+                : "Udvalgt ud fra varekataloget. Markerede links kan være betalt reklame."
+            }
           />
           <ul className="mt-4 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
             {feedProducts.map((p) => (
@@ -230,14 +244,20 @@ export default function CategoryPage({
       ) : (
         <section className="rounded-3xl border border-dashed border-pk-blue/30 bg-white/70 px-6 py-10 text-center">
           <p className="font-display text-lg font-bold text-pk-navy">
-            Ingen varer i kataloget matcher endnu
+            {q
+              ? `Ingen varer i kataloget med «${q}» lige nu`
+              : "Ingen varer i kataloget matcher endnu"}
           </p>
           <p className="mt-2 text-sm text-pk-navy/70">
             Prøv{" "}
             <Link href={searchDeepLink} className="font-bold text-pk-blue underline">
-              søgning
+              den fulde søgning
             </Link>{" "}
-            eller et andet søgeord.
+            eller et andet søgeord — eller{" "}
+            <Link href="/soeg" className="font-bold text-pk-blue underline">
+              gennemse hele kataloget
+            </Link>
+            .
           </p>
         </section>
       )}
