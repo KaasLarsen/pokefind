@@ -14,7 +14,10 @@ export default function HomeQuickNav() {
   const tiles = categories.slice(0, 6);
 
   return (
-    <section aria-label="Hurtige kategorier" className="relative">
+    <section
+      aria-label="Hurtige kategorier"
+      className="relative z-10 isolate"
+    >
       <div className="mb-5 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <h2 className="font-display text-2xl font-extrabold tracking-tight text-pk-navy md:text-3xl">
@@ -39,7 +42,7 @@ export default function HomeQuickNav() {
           <li key={c.id}>
             <Link
               href={`/kat/${c.slug}`}
-              className={`group relative flex min-h-[7.5rem] flex-col justify-between overflow-hidden rounded-2xl bg-gradient-to-br p-4 text-white shadow-lg shadow-pk-navy/15 transition duration-300 hover:scale-[1.03] hover:shadow-xl hover:shadow-pk-navy/25 ${ACCENTS[i % ACCENTS.length]}`}
+              className={`group relative flex min-h-[7.5rem] flex-col justify-between overflow-hidden rounded-2xl bg-gradient-to-br p-4 text-white shadow-lg shadow-pk-navy/15 transition duration-300 hover:scale-[1.03] hover:shadow-xl hover:shadow-pk-navy/25 touch-manipulation active:scale-[0.99] ${ACCENTS[i % ACCENTS.length]}`}
             >
               <span
                 className="pointer-events-none absolute -right-6 -top-6 h-24 w-24 rounded-full bg-white/15 blur-2xl transition group-hover:bg-white/25"

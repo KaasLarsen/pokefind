@@ -3,7 +3,7 @@ import SearchBar from "./SearchBar";
 
 export default function HeroSearch() {
   return (
-    <section className="pk-hero-shell relative overflow-hidden rounded-[2rem] border-2 border-white/25 px-5 py-16 shadow-2xl shadow-pk-navy/50 md:px-12 md:py-24">
+    <section className="pk-hero-shell relative z-0 overflow-hidden rounded-[2rem] border-2 border-white/25 px-5 py-16 shadow-2xl shadow-pk-navy/50 md:px-12 md:py-24">
       <div className="pk-hero-grid pointer-events-none absolute inset-0 opacity-35" aria-hidden />
       <div
         className="pointer-events-none absolute -right-20 -top-24 h-72 w-72 animate-pk-pulse-soft rounded-full bg-pk-electric/20 blur-3xl"

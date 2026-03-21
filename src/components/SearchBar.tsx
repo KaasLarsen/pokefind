@@ -67,13 +67,20 @@ export default function SearchBar({
   }, [debouncedQuery]);
 
   useEffect(() => {
-    function onDoc(e: MouseEvent) {
-      if (!containerRef.current?.contains(e.target as Node)) {
-        setOpen(false);
+    function closeIfOutside(e: Event) {
+      const target = e.target as Node | null;
+      if (!target || !containerRef.current?.contains(target)) {
+        /* Udskyd så vi ikke afbryder klik på links under søgefeltet (mobil) */
+        queueMicrotask(() => setOpen(false));
       }
     }
-    document.addEventListener("mousedown", onDoc);
-    return () => document.removeEventListener("mousedown", onDoc);
+    /* pointerdown + mousedown: bedre touch-support end kun mousedown */
+    document.addEventListener("pointerdown", closeIfOutside);
+    document.addEventListener("mousedown", closeIfOutside);
+    return () => {
+      document.removeEventListener("pointerdown", closeIfOutside);
+      document.removeEventListener("mousedown", closeIfOutside);
+    };
   }, []);
 
   const navigateTo = useCallback(
