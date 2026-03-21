@@ -1,6 +1,17 @@
 {
   "pageViews": {
-    "tcg-online-codes": 2
+    "tcg-online-codes": 6,
+    "booster-packs": 4,
+    "booster-boxes": 3,
+    "etb": 4,
+    "blister-packs": 4,
+    "tins": 4,
+    "single-cards": 4,
+    "playmats": 4,
+    "deck-boxes-binders": 4,
+    "sleeves-protectors": 4,
+    "grading-psa": 4,
+    "starter-bundles": 4
   },
   "affiliateClicks": {}
 }

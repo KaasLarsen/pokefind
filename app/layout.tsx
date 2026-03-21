@@ -113,6 +113,14 @@ export default function RootLayout({
                     <a className="underline hover:text-pk-yellow" href="/guider">
                       Guider
                     </a>
+                    <span className="text-white/40">·</span>
+                    <a className="underline hover:text-pk-yellow" href="/om">
+                      Om
+                    </a>
+                    <span className="text-white/40">·</span>
+                    <a className="underline hover:text-pk-yellow" href="/kontakt">
+                      Kontakt
+                    </a>
                   </p>
                   <p className="mt-2">
                     <a className="underline hover:text-pk-yellow" href="/cookies">
