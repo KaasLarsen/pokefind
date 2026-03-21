@@ -148,7 +148,7 @@ export default function CategoryPage({
           <SectionTitle
             kicker="Tilpas"
             title="Find det rigtige — filtrér før du klikker videre"
-            subtitle="Vi samler dit søge-udtryk til Amazon/eBay. Tomme felter = ingen ekstra ord i søgningen."
+            subtitle="Filtrér her og brug derefter søgning og kataloget på PokéFind. Tomme felter = ingen ekstra ord i søgningen."
           />
           <form className="mt-6 grid gap-4 sm:grid-cols-3" method="get">
             <label className="text-sm font-semibold text-pk-navy">
@@ -242,34 +242,47 @@ export default function CategoryPage({
         </section>
       )}
 
-      <section className="pk-card ring-1 ring-pk-yellow/30">
-        <div className="pk-card-inner">
-          <SectionTitle
-            kicker="Markedssøgning"
-            title="Åbn mere udvalg hos butikker"
-            subtitle="Generiske søgninger hos Amazon.dk og eBay — stadig med tydelig reklamelink."
-          />
+      {enabledProviders.length > 0 ? (
+        <section className="pk-card ring-1 ring-pk-yellow/30">
+          <div className="pk-card-inner">
+            <SectionTitle
+              kicker="Markedssøgning"
+              title="Åbn mere udvalg hos partnere"
+              subtitle="Eksterne søgelinks med tydelig reklamemarkering."
+            />
 
-          <div className="mt-6 space-y-4">
-            {enabledProviders.map((p) => (
-              <AffiliateLink
-                key={p.id}
-                providerName={p.name}
-                href={p.buildSearchUrl(outboundQuery)}
-                label="Reklamelink"
-                tracking={{ categorySlug: category.slug, providerId: p.id }}
-              >
-                {category.title}: søg via {p.name}
-              </AffiliateLink>
-            ))}
-          </div>
+            <div className="mt-6 space-y-4">
+              {enabledProviders.map((p) => (
+                <AffiliateLink
+                  key={p.id}
+                  providerName={p.name}
+                  href={p.buildSearchUrl(outboundQuery)}
+                  label="Reklamelink"
+                  tracking={{ categorySlug: category.slug, providerId: p.id }}
+                >
+                  {category.title}: søg via {p.name}
+                </AffiliateLink>
+              ))}
+            </div>
 
-          <div className="mt-8 rounded-2xl border border-pk-mint/30 bg-gradient-to-r from-pk-cream/90 to-white px-5 py-4 text-sm text-pk-navy/85">
-            <strong className="text-pk-navy">Tip:</strong> Vi tilføjer løbende flere
-            butikker, så du får flere valg herfra.
+            <div className="mt-8 rounded-2xl border border-pk-mint/30 bg-gradient-to-r from-pk-cream/90 to-white px-5 py-4 text-sm text-pk-navy/85">
+              <strong className="text-pk-navy">Tip:</strong> Vi tilføjer løbende flere
+              partnere, så du får flere valg herfra.
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      ) : (
+        <section className="rounded-3xl border border-pk-blue/15 bg-white/90 px-6 py-8 text-center shadow-sm">
+          <p className="text-sm font-medium text-pk-navy/85">
+            Brug{" "}
+            <Link href={searchDeepLink} className="font-bold text-pk-blue underline">
+              søgning
+            </Link>{" "}
+            og varekortene ovenfor — eksterne butikslinks tilføjes, når vi har aktive
+            partnerskaber.
+          </p>
+        </section>
+      )}
     </div>
   );
 }

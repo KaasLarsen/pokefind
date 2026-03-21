@@ -49,8 +49,18 @@ export default function GuidePage({ params }: { params: { slug: string } }) {
           Anbefalede køb
         </h2>
         <p className="mt-1 text-sm text-pk-navy/70">
-          Vælg et format og køb via de affiliate-CTA’er, der passer til din
-          beslutning. Alle CTA’er er markeret som “Reklamelink”.
+          {enabledProviders.length > 0 ? (
+            <>
+              Vælg et format og brug de markerede reklamelinks, når de findes. Alle
+              sådanne links er tydeligt mærket.
+            </>
+          ) : (
+            <>
+              Gå ind på en kategori for at se kuraterede produkter fra vores katalog og
+              søge videre på PokéFind. Eksterne partnerlinks tilføjes, når vi har aktive
+              aftaler.
+            </>
+          )}
         </p>
 
         <div className="mt-4 space-y-6">
@@ -73,18 +83,20 @@ export default function GuidePage({ params }: { params: { slug: string } }) {
                 </Link>
               </div>
 
-              <div className="mt-3 grid gap-3 md:grid-cols-2">
-                {enabledProviders.map((p) => (
-                  <AffiliateLink
-                    key={`${c.slug}-${p.id}`}
-                    providerName={p.name}
-                    href={p.buildSearchUrl(c.searchKeywords[0] ?? c.title)}
-                    label="Reklamelink"
-                  >
-                    Køb {c.title} via {p.name}
-                  </AffiliateLink>
-                ))}
-              </div>
+              {enabledProviders.length > 0 ? (
+                <div className="mt-3 grid gap-3 md:grid-cols-2">
+                  {enabledProviders.map((p) => (
+                    <AffiliateLink
+                      key={`${c.slug}-${p.id}`}
+                      providerName={p.name}
+                      href={p.buildSearchUrl(c.searchKeywords[0] ?? c.title)}
+                      label="Reklamelink"
+                    >
+                      Køb {c.title} via {p.name}
+                    </AffiliateLink>
+                  ))}
+                </div>
+              ) : null}
             </section>
           ))}
         </div>

@@ -43,10 +43,11 @@ export type AffiliateProvider = {
 };
 
 export const affiliateProviders: AffiliateProvider[] = [
+  /* Kun slå til når I har aktiv aftale + korrekt taggede links (Associates/EPN el.lign.) */
   {
     id: "amazon",
     name: "Amazon.dk (affiliate)",
-    enabled: true,
+    enabled: false,
     network: "amazon",
     buildSearchUrl: (query) =>
       `https://www.amazon.dk/s?k=${encodeURIComponent(query)}`,
@@ -54,7 +55,7 @@ export const affiliateProviders: AffiliateProvider[] = [
   {
     id: "ebay",
     name: "eBay (affiliate)",
-    enabled: true,
+    enabled: false,
     network: "ebay",
     buildSearchUrl: (query) =>
       `https://www.ebay.com/sch/i.html?_nkw=${encodeURIComponent(query)}`,
