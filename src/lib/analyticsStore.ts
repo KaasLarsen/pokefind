@@ -31,7 +31,11 @@ function ensureStore(): AnalyticsState {
 }
 
 function writeStore(next: AnalyticsState) {
-  fs.writeFileSync(DATA_FILE, JSON.stringify(next, null, 2), "utf-8");
+  try {
+    fs.writeFileSync(DATA_FILE, JSON.stringify(next, null, 2), "utf-8");
+  } catch {
+    /* Vercel/serverless: filsystem er skrivebeskyttet — ignorer (API forbliver 200) */
+  }
 }
 
 export function incrementEvent(args: {

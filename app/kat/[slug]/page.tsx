@@ -5,7 +5,6 @@ import { AffiliateLink } from "../../../src/components/AffiliateLink";
 import PageViewTracker from "../../../src/components/PageViewTracker";
 import ProductCard from "../../../src/components/ProductCard";
 import SectionTitle from "../../../src/components/SectionTitle";
-import { incrementEvent } from "../../../src/lib/analyticsStore";
 import {
   affiliateProviders,
   categories,
@@ -63,7 +62,7 @@ export default function CategoryPage({
   const category = categories.find((c) => c.slug === params.slug);
   if (!category) notFound();
 
-  incrementEvent({ type: "page_view", categorySlug: category.slug });
+  /* Pageviews: kun client-side (PageViewTracker). fs.write under SSR fejler på Vercel. */
 
   const audience = readParam<Audience>(searchParams?.audience);
   const priceTier = readParam<PriceTier>(searchParams?.priceTier);
