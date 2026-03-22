@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { AffiliateDisclosureBox } from "../../../src/components/AffiliateDisclosureBox";
@@ -50,6 +51,27 @@ function buildOutboundQuery({
 
 export function generateStaticParams() {
   return categories.map((c) => ({ slug: c.slug }));
+}
+
+export function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}): Metadata {
+  const category = categories.find((c) => c.slug === params.slug);
+  if (!category) {
+    return { title: "Kategori — PokéFind" };
+  }
+  return {
+    title: `${category.title} — PokéFind`,
+    description: category.description,
+    openGraph: {
+      title: `${category.title} — PokéFind`,
+      description: category.description,
+      type: "website",
+      locale: "da_DK",
+    },
+  };
 }
 
 /** Så ?q=… / filtre altid læses på serveren (ellers kan statisk HTML ignorere query) */

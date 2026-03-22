@@ -151,6 +151,8 @@ export const categories: Category[] = [
     title: "Tins / Collection tins",
     description:
       "En fed gave-løsning: booster(s) + ofte promo-kort og en praktisk opbevaringsdåse.",
+    longBody:
+      "Collection tins kombinerer ofte én eller flere boosters med promo-kort og en metal- eller plastdåse du kan genbruge til opbevaring eller display. Det gør dem oplagte som gave eller første køb, fordi du får både “noget at åbne” og et fysisk produkt der kan stå på hylden.\n\nIndhold varierer mellem udgaver: tjek altid hvilken serie boosteren tilhører, og om der er et specifikt promo-kort. Pris pr. booster kan være højere end ved løse pakker — du betaler også for emballage og tema.\n\nVælg en tin, når du vil have en samlet gave, et børnevenligt produkt med tydelig “pakkeoplevelse”, eller når du samler en bestemt promo, der følger med den pågældende tin.",
     searchKeywords: ["pokemon collection tin", "pokemon tin"],
     formats: ["tin"],
     audiences: ["begynder", "børn"],
@@ -188,6 +190,8 @@ export const categories: Category[] = [
     title: "Deck boxes & binders",
     description:
       "Praktisk opbevaring til deckbuilding og samling. Perfekt når du både spiller og samler.",
+    longBody:
+      "En deck box holder typisk ét færdigt deck (ofte 60 kort plus ekstra) og beskytter mod bøjning og støv, når du transporterer til kampe. Vælg størrelse efter om du bruger sleeves — dobbelt-sleevede kort fylder mere.\n\nBinders med lommer er bedst til samling og oversigt: du kan bladre sæt igennem uden at rode kortene sammen. Mange bruger binder til “binder pages” og deck box til det deck, de spiller med i ugen.\n\nTypisk fejl er at købe en for lille æske eller en binder, hvor kortene sidder for stramt — det kan skade kanter over tid. Gå efter kvalitet med lynlås eller fast ryg, hvis du ofte har tasken med.",
     searchKeywords: ["pokemon deck box", "pokemon binder"],
     formats: ["accessory-storage"],
     audiences: ["begynder", "erfaren"],
@@ -199,6 +203,8 @@ export const categories: Category[] = [
     title: "Playmats",
     description:
       "Gør spillet rarere og mere “pro”. En playmat beskytter bordet og samler dine kort pænt.",
+    longBody:
+      "En playmat er et blødt underlag til bordet, ofte med trykt motiv eller markeret felt til Pokémon-kort. Den gør kort lettere at løfte uden at slide kanter, og den samler dit spilområde visuelt — særligt nyttigt hvis bordet er ru eller vådt.\n\nStørrelse er ofte “standard” til kortspil; tjek om du vil have en med taske eller rulle. Officielle og fan-motiver findes i mange designs; vælg noget du ikke bliver træt af at se på turneringer.\n\nKøb typisk en playmat, når du spiller regelmæssigt eller vil skåne kortene bedre end et bart bord. Det er sjældent “første køb”, men et naturligt andet skridt efter sleeves.",
     searchKeywords: ["pokemon playmat"],
     formats: ["playmat"],
     audiences: ["begynder", "erfaren"],
@@ -210,6 +216,8 @@ export const categories: Category[] = [
     title: "PSA grading (graded cards)",
     description:
       "Når du vil vurdere og beskytte særligt værdifulde kort. Læs hvornår det giver mening før du går all-in.",
+    longBody:
+      "Grading (fx PSA) betyder, at et professionelt firma vurderer kortets stand og indkapsler det i et holder med et score. Det kan øge salgsværdien og gøre kortet lettere at handle — men det koster gebyr og tid, og ikke alle kort lønner sig at sende ind.\n\nOvervej grading kun hvis kortet har høj nok markedsværdi og bedre stand end “gennemsnit”, eller hvis du bevidst investerer i sjældne kort. Almindelige spill-kort eller kort med synlige fejl giver sjældent gevinst efter omkostninger.\n\nKøb allerede graded kort, hvis du vil undgå processen selv eller hvis du søger en bestemt score. Læs altid sælgers fotos og returpolitik — og kombinér med vores guide om PSA, før du betaler premium.",
     searchKeywords: ["psa graded pokemon card", "pokemon grading psa"],
     formats: ["grading"],
     audiences: ["erfaren"],
@@ -221,6 +229,8 @@ export const categories: Category[] = [
     title: "TCG Online koder",
     description:
       "Hvis du spiller TCG Online: brug koder til at komme i gang med decks og udvidelser.",
+    longBody:
+      "Nogle fysiske Pokémon-produkter indeholder digitale koder til kortspil på nettet (eller tilknyttede platforme — navnet på spillet kan ændre sig over tid). Koder kan også sælges separat. Vær opmærksom på udløb, region og om koden stadig er gyldig i den app du bruger.\n\nNår du køber koder fra andre brugere eller markedspladser, er risiko for svindel højere end ved fysiske varer. Brug etablerede sælgere og læs beskrivelsen grundigt.\n\nVælg denne kategori, når du spiller digitalt og vil supplere med indhold fra koder, eller når du bevidst søger efter kode-baserede tilbud frem for kun fysiske kort.",
     searchKeywords: ["pokemon tcg online code", "tcg online code"],
     formats: ["tcg-online"],
     audiences: ["begynder", "erfaren", "børn"],
@@ -232,6 +242,8 @@ export const categories: Category[] = [
     title: "Starter-bundles",
     description:
       "Kuraterede “kom hurtigt i gang”-sammensætninger til børn, begyndere og gave-køb.",
+    longBody:
+      "Starter-bundles og samlepakker samler ofte flere produkter i ét køb — fx decks, boosters eller tilbehør — med et fælles tema. Det kan spare tid, når du ikke vil sammensætte alt selv, eller når du giver en gave og vil have en tydelig “pakke”.\n\nLæs altid, hvad bundlen faktisk indeholder: ord som “bundle” kan dække over meget forskelligt indhold. Sammenlign pris med at købe delene enkeltvis, hvis du har tid.\n\nVælg et bundle, når du vil hurtigt i gang, give en samlet begynderstart, eller når du finder en pakke, der matcher præcis den serie eller det niveau, du søger.",
     searchKeywords: ["pokemon starter set", "pokemon bundle"],
     formats: ["booster-pack", "etb"],
     audiences: ["børn", "begynder"],
