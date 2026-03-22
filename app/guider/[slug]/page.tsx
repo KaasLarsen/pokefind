@@ -10,6 +10,8 @@ import {
   categories,
   guides,
 } from "../../../src/lib/content";
+import JsonLd from "../../../src/components/JsonLd";
+import { buildGuideArticleJsonLd } from "../../../src/lib/structuredData";
 import { getProductsByIds } from "../../../src/lib/searchProducts";
 
 export function generateStaticParams() {
@@ -53,6 +55,7 @@ export default function GuidePage({ params }: { params: { slug: string } }) {
 
   return (
     <div>
+      <JsonLd data={buildGuideArticleJsonLd(guide, params.slug)} />
       <AffiliateDisclosureBox />
 
       <div className="space-y-2">

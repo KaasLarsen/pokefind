@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import Link from "next/link";
+import JsonLd from "../../src/components/JsonLd";
+import { faqItemsForJsonLd } from "../../src/lib/faqJsonLdContent";
+import { buildFaqPageJsonLd } from "../../src/lib/structuredData";
 
 export const metadata: Metadata = {
   title: "FAQ — PokéFind",
@@ -110,11 +113,75 @@ const items: { q: string; a: ReactNode }[] = [
       </>
     ),
   },
+  {
+    q: "Hvorfor vises der ikke Yu-Gi-Oh eller andre kortspil i produktsøgningen?",
+    a: (
+      <>
+        PokéFind er målrettet <strong className="text-pk-navy">Pokémon TCG</strong>. Katalog og
+        søgning er filtreret, så du primært ser Pokémon-relaterede varer. Søger du bevidst efter
+        andre kortspil som søgeord, viser vi typisk ingen produkter — det er bevidst for at holde
+        oplevelsen fokuseret.
+      </>
+    ),
+  },
+  {
+    q: "Hvorfor kan prisen hos butikken afvige fra det, jeg ser her?",
+    a: (
+      <>
+        Priser og lager kommer fra feeds og kan ændre sig mellem opdateringer. Vi viser, hvad
+        partneren senest har sendt; den endelige pris, moms og fragt står altid hos forhandleren på
+        tidspunktet for køb.
+      </>
+    ),
+  },
+  {
+    q: "Skriver I selv anmeldelser af produkter?",
+    a: (
+      <>
+        Nej. PokéFind er en guide og et katalogudsnit — ikke et anmeldelsessite. Vi forklarer
+        formater og viser eksempler; meninger om konkrete produkter bør du søge hos fællesskaber,
+        anmeldere eller ved at læse butikkens beskrivelse.
+      </>
+    ),
+  },
+  {
+    q: "Hvordan finder jeg en bestemt Pokémon-serie eller udvidelse?",
+    a: (
+      <>
+        Brug{" "}
+        <Link className="font-semibold text-pk-blue underline hover:text-pk-navy" href="/soeg">
+          søgningen
+        </Link>{" "}
+        med seriens navn eller gå ind på den relevante{" "}
+        <Link className="font-semibold text-pk-blue underline hover:text-pk-navy" href="/kategorier">
+          kategori
+        </Link>{" "}
+        og brug filter og søgeord. Tjek altid produktnavnet hos forhandleren.
+      </>
+    ),
+  },
+  {
+    q: "Er PokéFind gratis at bruge?",
+    a: (
+      <>
+        Ja. Det er gratis at bruge søgning, kategorier og guides. Vi kan tjene provision på nogle
+        udgående links, som er markeret som reklame — se{" "}
+        <Link
+          className="font-semibold text-pk-blue underline hover:text-pk-navy"
+          href="/affiliate-disclosure"
+        >
+          reklame og affiliate
+        </Link>
+        .
+      </>
+    ),
+  },
 ];
 
 export default function FaqPage() {
   return (
     <div className="max-w-2xl space-y-8">
+      <JsonLd data={buildFaqPageJsonLd(faqItemsForJsonLd)} />
       <div>
         <h1 className="font-display text-3xl font-extrabold text-pk-navy md:text-4xl">
           Ofte stillede spørgsmål

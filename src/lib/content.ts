@@ -100,7 +100,7 @@ export const categories: Category[] = [
     description:
       "Små, sjove pakker til overraskelser. Perfekt når du vil i gang uden at bruge en stor sum.",
     longBody:
-      "En booster pack er den klassiske måde at få nye kort på i Pokémon TCG: du ved, at du får et lille udpluk fra den pågældende serie, men ikke præcis hvilke kort. Det gør dem ideelle til at starte en samling, mærke spillet eller give som gave uden at skulle kende alle kortnavne på forhånd.\n\nTypiske fejl er at forveksle booster packs med blisters, tins eller ETB — de kan ligne hinanden i søgeresultater, men indeholder forskellige mængder og tilbehør. Tjek altid produktnavn og hvad der står på emballagen om antal boosters og eventuelle promo-kort.\n\nVælg booster packs, når du vil have flest “træk” for pengene i små bidder, eller når du samler en bestemt udvidelse og vil åbne flere pakker over tid.",
+      "En booster pack er den klassiske måde at få nye kort på i Pokémon TCG: du ved, at du får et lille udpluk fra den pågældende serie, men ikke præcis hvilke kort. Det gør dem ideelle til at starte en samling, mærke spillet eller give som gave uden at skulle kende alle kortnavne på forhånd.\n\nTypiske fejl er at forveksle booster packs med blisters, tins eller ETB — de kan ligne hinanden i søgeresultater, men indeholder forskellige mængder og tilbehør. Tjek altid produktnavn og hvad der står på emballagen om antal boosters og eventuelle promo-kort.\n\nVælg booster packs, når du vil have flest “træk” for pengene i små bidder, eller når du samler en bestemt udvidelse og vil åbne flere pakker over tid.\n\nMange danskere søger efter “Pokémon booster pack”, “booster pakke Pokémon TCG” eller navnet på den aktuelle udvidelse — brug PokéFinds søgning og filtre her på siden, så du rammer den rigtige serie før du klikker videre til en butik.",
     searchKeywords: ["pokemon booster pack", "pokemon booster packs"],
     formats: ["booster-pack"],
     audiences: ["børn", "begynder"],
@@ -294,7 +294,7 @@ export const guides: Guide[] = [
     slug: "hvad-skal-jeg-koebe-som-begynder",
     title: "Hvad skal jeg købe som nybegynder?",
     summary:
-      "Tre hurtige valg: vil du have overraskelse (boosters), en samlet startpakke (ETB) eller præcise kort (singles)? Her får du en beslutningsramme, så du ikke køber “tilfældigt” i webshoppens søgefelt.",
+      "Tre hurtige valg: vil du have overraskelse (boosters), en samlet startpakke (ETB) eller præcise kort (singles)? Her får du en beslutningsramme, så du ikke køber “tilfældigt” i webshoppens søgefelt. Indholdet opdateres løbende efter nye serier og typiske begynderspørgsmål.",
     audience: "begynder",
     recommendedCategorySlugs: ["etb", "booster-packs", "single-cards", "sleeves-protectors"],
     featuredProductIds: [
@@ -305,6 +305,12 @@ export const guides: Guide[] = [
     featuredProductsIntro:
       "Eksempler på booster packs og sleeves fra kataloget — supplerer rådene nedenfor.",
     steps: [
+      {
+        heading: "Søg smart fra Google (Danmark)",
+        body:
+          "Når du starter fra Google, søg gerne med hele fraser som “Pokémon TCG nybegynder” eller “køb Pokémon booster Danmark” — så undgår du at ende på tilfældige markedpladser. På PokéFind samler vi Pokémon-varer fra feeds og linker til forhandlere; brug vores kategorier og guides først, så du ved hvilket format du leder efter, før du sammenligner priser.",
+        readMore: { href: "/kategorier", label: "Se alle kategorier" },
+      },
       {
         heading: "Start med målet: spil, samling eller gave?",
         body:
@@ -336,7 +342,7 @@ export const guides: Guide[] = [
     slug: "booster-box-vs-etb-vs-enkeltkort",
     title: "Booster box vs ETB vs enkeltkort: hvad giver mest værdi?",
     summary:
-      "“Værdi” betyder forskellige ting: flest træk for pengene, færrest skuffelser, eller hurtigst fra idé til færdigt deck. Her er en praktisk inddeling uden at love faste priser — de ændrer sig med marked og butik.",
+      "“Værdi” betyder forskellige ting: flest træk for pengene, færrest skuffelser, eller hurtigst fra idé til færdigt deck. Her er en praktisk inddeling uden at love faste priser — de ændrer sig med marked og butik. Opdateret med aktuelle købsmønstre for Pokémon TCG.",
     audience: "begynder",
     recommendedCategorySlugs: ["booster-boxes", "etb", "single-cards", "deck-boxes-binders"],
     featuredProductIds: ["feed-2514-54243", "feed-2514-63860", "feed-2514-15894"],

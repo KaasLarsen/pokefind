@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import JsonLd from "../../src/components/JsonLd";
+import { buildOrganizationJsonLd } from "../../src/lib/structuredData";
 
 export const metadata: Metadata = {
   title: "Om PokéFind",
@@ -9,6 +11,7 @@ export const metadata: Metadata = {
 export default function OmPage() {
   return (
     <div className="max-w-2xl">
+      <JsonLd data={buildOrganizationJsonLd()} />
       <h1 className="font-display text-3xl font-extrabold text-pk-navy">Om PokéFind</h1>
       <p className="mt-4 text-sm leading-relaxed text-pk-navy/80">
         PokéFind hjælper dig med at finde produkter, sammenligne formater og læse korte,
