@@ -505,5 +505,173 @@ export const guides: Guide[] = [
       },
     ],
   },
+  {
+    id: "guide-blister-vs-booster",
+    slug: "blister-vs-booster-forskellen",
+    title: "Blister vs løs booster: hvad er forskellen?",
+    summary:
+      "To måder at købe boosters på — med eller uden blisterkort og ekstra emballage. Sådan vælger du det rigtige til pris, promo og gave.",
+    audience: "begynder",
+    recommendedCategorySlugs: ["blister-packs", "booster-packs", "tins"],
+    steps: [
+      {
+        heading: "Løs booster pack = kun pakken",
+        body:
+          "En klassisk booster er en lille forseglet pakke med tilfældige kort fra en bestemt serie. Den er ofte den billigste vej “pr. åbning”, hvis du ikke går efter promo-kort eller samleremballage.",
+        readMore: { href: "/kat/booster-packs", label: "Se booster packs" },
+      },
+      {
+        heading: "Blister = booster + ofte promo på plade",
+        body:
+          "Et blister pack er booster(en) monteret på en pap-plade, ofte med et synligt promo-kort, mønt eller lignende. Du betaler typisk lidt ekstra for promo og emballage — til gengæld ved du ofte præcis, hvilket ekstra kort der følger med.",
+        readMore: { href: "/kat/blister-packs", label: "Se blister packs" },
+      },
+      {
+        heading: "Hvornår vælger du hvad?",
+        body:
+          "Går du efter et bestemt promo eller en pæn gave, er blister eller tin ofte nemmere at forklare. Vil du maksimere antal åbninger for pengene, er løse boosters eller større bokse ofte bedre. Læs altid titlen: antal boosters og serie skal matche det, du forventer.",
+      },
+    ],
+  },
+  {
+    id: "guide-gave",
+    slug: "pokemon-tcg-som-gave",
+    title: "Pokémon TCG som gave: børn, teenagere og voksne",
+    summary:
+      "Sådan vælger du et oplagt gavekøb uden at blive overrasket over indhold eller pris — fra budget til “wow”-æske.",
+    audience: "begynder",
+    recommendedCategorySlugs: ["tins", "etb", "starter-bundles", "booster-packs"],
+    steps: [
+      {
+        heading: "Afstem forventning: samling eller spil?",
+        body:
+          "Nogle vil gerne åbne pakker for sjov; andre vil bygge et deck. Tins og ETB’er føles ofte mere “færdige” som gave end en håndfuld løse boosters. Spørg diskret, eller vælg noget med tydelig værdi på emballagen.",
+        readMore: { href: "/guider/hvad-skal-jeg-koebe-som-begynder", label: "Læs guiden til nybegynder-køb" },
+      },
+      {
+        heading: "Budgettrin: blisters → tins → ETB",
+        body:
+          "Ved lavt budget er blister eller en enkelt tin et godt kompromis. Vil du give mere, giver ETB ofte både boosters og tilbehør i én æske. Tjek at serien stadig er tilgængelig og ikke udsolgt overalt.",
+        readMore: { href: "/kat/tins", label: "Se tins" },
+      },
+      {
+        heading: "Tilføj sleeves hvis kortene skal bruges",
+        body:
+          "Hvis modtageren skal spille med kortene, er en pakke sleeves en oplagt tilføjelse — det viser, at du har tænkt på holdbarhed.",
+        readMore: { href: "/kat/sleeves-protectors", label: "Se sleeves" },
+      },
+    ],
+  },
+  {
+    id: "guide-falske-kort",
+    slug: "undgaa-falske-og-tvivlsomme-kort",
+    title: "Sådan undgår du falske eller tvivlsomme Pokémon-kort",
+    summary:
+      "Køb fra pålidelige kilder, tjek pris og detaljer — og vær ekstra forsigtig ved “for gode til at være sande”-tilbud på enkeltkort og sjældne kort.",
+    audience: "begynder",
+    recommendedCategorySlugs: ["single-cards", "grading-psa", "booster-packs"],
+    steps: [
+      {
+        heading: "Ekstremt lave priser er et rødt flag",
+        body:
+          "Hvis en sjælden holo eller et graded kort sælges langt under markedsniveau uden god forklaring, er risikoen for kopi, skade eller svindel høj. Sammenlign med flere forhandlere og brug din mavefornemmelse.",
+        readMore: { href: "/kat/single-cards", label: "Find enkeltkort i kataloget" },
+      },
+      {
+        heading: "Køb helst fra etablerede butikker",
+        body:
+          "Ved høj værdi: vælg sælgere med klare retur- og ægthedspolitikker. På markedspladser: læs anmeldelser, billeder i høj opløsning og om varen sendes beskyttet.",
+      },
+      {
+        heading: "Lær kortets “rigtige” udseende",
+        body:
+          "Kopi kan have forkert glans, tekstur, farve eller tykkelse. Sammenlign med officielle billeder og — ved tvivl — få kortet vurderet af nogen med erfaring før du betaler toppris.",
+        readMore: { href: "/guider/psa-grading-hvornaar-giver-det-mening", label: "Om grading og værdi" },
+      },
+    ],
+  },
+  {
+    id: "guide-rarity",
+    slug: "rarity-og-symboler-paa-pokemon-kort",
+    title: "Rarity og symboler: sådan læser du et Pokémon-kort",
+    summary:
+      "Kort nederst har symboler for sjældenhed og serie — en kort intro, så du ikke forveksler almindelige kort med særlige udgaver.",
+    audience: "begynder",
+    recommendedCategorySlugs: ["booster-packs", "single-cards", "blister-packs"],
+    steps: [
+      {
+        heading: "Cirkel, diamant, stjerne (klassisk mønster)",
+        body:
+          "Mange moderne kort viser nederst til venstre et symbol: typisk common (cirkel), uncommon (diamant) og rare eller højere (stjerne eller varianter). Præcis grafik kan ændre sig mellem serier — brug det som pejlemærke, ikke som eneste sandhed.",
+      },
+      {
+        heading: "Serie og sæt-nummer",
+        body:
+          "Kortet viser ofte et sæt-navn og et nummer (fx “123/198”). Det hjælper dig med at finde kortet i databaser og ved enkeltkøb, så du køber den rigtige udgave.",
+        readMore: { href: "/soeg", label: "Søg efter kort i kataloget" },
+      },
+      {
+        heading: "Særlige udgaver: reverse, holo, full art",
+        body:
+          "Ud over “rarity” findes mange visuelle varianter (holo, tekstur, full art). To kort med samme navn kan have forskellig værdi — tjek altid billedet og beskrivelsen ved køb.",
+      },
+    ],
+  },
+  {
+    id: "guide-organiser-samling",
+    slug: "organiser-din-pokemon-kortsamling",
+    title: "Organiser din Pokémon-kortsamling (uden at gå i sort)",
+    summary:
+      "En enkel metode: sorter efter serie, deck og handel — så du finder kortene igen og undgår at beskadige dem i en skuffe.",
+    audience: "begynder",
+    recommendedCategorySlugs: ["deck-boxes-binders", "sleeves-protectors", "single-cards"],
+    steps: [
+      {
+        heading: "Del i: spil, handel, samling",
+        body:
+          "Læg kort du aktivt spiller med i ét deck eller én kasse. “Til salg/bytte” i en anden. Værdifulde eller sjældne kort i sleeves og gerne binder eller top-loader — ikke løst i en skål.",
+        readMore: { href: "/guider/sleeves-og-opbevaring-hvad-du-bruger", label: "Sleeves og opbevaring" },
+      },
+      {
+        heading: "Brug binders til oversigt",
+        body:
+          "Ringbind med lommer gør det nemt at bladre serier igennem. Undgå at presse for mange kort i samme lomme — det kan skade kanter.",
+        readMore: { href: "/kat/deck-boxes-binders", label: "Deck boxes og binders" },
+      },
+      {
+        heading: "Hold det tørt og køligt",
+        body:
+          "Undgå direkte sol, fugt og løse drikke ved kortene. En simpel boks med låg på hylden slår en papkasse på gulvet, når du vil bevare stand over år.",
+      },
+    ],
+  },
+  {
+    id: "guide-foraeldre",
+    slug: "foraeldre-pokemon-kort-budget-og-regler",
+    title: "Forældre: budget, regler og tryghed omkring Pokémon-kort",
+    summary:
+      "Kort oversigt: hvad koster hobbyen groft, hvordan sætter I rammer, og hvordan undgår I skuffelser når børn handler online eller bytter i skolegården.",
+    audience: "begynder",
+    recommendedCategorySlugs: ["starter-bundles", "booster-packs", "sleeves-protectors"],
+    steps: [
+      {
+        heading: "Sæt et månedligt “pakke-budget”",
+        body:
+          "Aftal et beløb til boosters eller gaveprodukter — så undgår I impulskøb og kan planlægge større køb (fx fødselsdag) samlet.",
+        readMore: { href: "/guider/pokemon-tcg-som-gave", label: "Gaveguide" },
+      },
+      {
+        heading: "Lær børn at tjekke før bytte",
+        body:
+          "Bytte i skolen kan være sjovt, men værdier er ujævne. Snak om fair bytte, og at dyre eller personlige kort måske skal blive hjemme.",
+      },
+      {
+        heading: "Online: fælles køb eller forældrekonto",
+        body:
+          "Handler I online, er det en god idé at gennemgå kurven sammen: rigtig serie, antal boosters og totalpris med fragt. Se vores FAQ om katalog og links.",
+        readMore: { href: "/faq", label: "FAQ" },
+      },
+    ],
+  },
 ];
 
