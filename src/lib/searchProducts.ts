@@ -1,8 +1,14 @@
 import productsData from "../../data/products.json";
 import type { Category } from "./content";
+import {
+  isBlockedNonPokemonFranchiseQuery,
+  isPokemonProductRecord,
+} from "./pokemonScope";
 import type { ProductRecord } from "./productTypes";
 
-const products = productsData as ProductRecord[];
+const productsRaw = productsData as ProductRecord[];
+/** Kun varer der tydeligt er Pokémon — aldrig Yu-Gi-Oh, MTG m.m. */
+const products = productsRaw.filter(isPokemonProductRecord);
 
 const productById = new Map(products.map((p) => [p.id, p]));
 
@@ -23,6 +29,7 @@ function normalize(s: string) {
 export function searchProducts(query: string, limit = 24): ProductRecord[] {
   const q = normalize(query);
   if (!q) return [];
+  if (isBlockedNonPokemonFranchiseQuery(query)) return [];
 
   const matches = products.filter((p) => {
     const hay = normalize(

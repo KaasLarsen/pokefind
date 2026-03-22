@@ -62,8 +62,19 @@ function collectFeedEntries() {
   return [];
 }
 
-const POKEMON_RE =
-  /pokemon|pokémon|pok\s*&\s*mon|pok[eé]mon|tcg/i;
+/** Hold synkron med src/lib/pokemonScope.ts (samme regex + rækkefølge). */
+const EXCLUDE_OTHER_TCG =
+  /yu[- ]?gi[- ]?oh|yugioh|遊戯王|magic\s*:\s*the\s*gathering|\bmagic\s*tg\b|\bmtg\b|\bdigimon\b|one[\s-]piece\s*(tcg|card|trading)?|flesh\s+and\s+blood|disney\s*lorcana|\blorcana\b|dragon\s*ball\s*(tcg|card)?|beyblade|weiss\s*schwarz|cardfight|vanguard|shadowverse|final\s*fantasy\s*tcg|warhammer|keyforge/i;
+const INCLUDE_POKEMON =
+  /pokemon|pokémon|pok\s*&\s*mon|pok[eé]mon|ポケモン|pocket\s*monsters/i;
+
+function isPokemonProductText(blob) {
+  const s = String(blob ?? "").trim();
+  if (!s) return false;
+  if (INCLUDE_POKEMON.test(s)) return true;
+  if (EXCLUDE_OTHER_TCG.test(s)) return false;
+  return false;
+}
 
 function toArray(v) {
   if (v == null) return [];
@@ -155,8 +166,9 @@ function normalizeProduct(raw, idx, feedLabel = "partner-ads") {
 }
 
 function isPokemonRelevant(p) {
-  const blob = `${p.title} ${p.description}`.toLowerCase();
-  return POKEMON_RE.test(blob);
+  return isPokemonProductText(
+    `${p.title} ${p.description} ${p.merchant} ${p.feedSource}`,
+  );
 }
 
 function parseFeedXml(xml, feedLabel) {
@@ -218,15 +230,19 @@ async function main() {
   allMapped = dedupeById(allMapped);
 
   const withLinks = allMapped.filter((p) => p.affiliateUrl);
-  const pokemon = withLinks.filter(isPokemonRelevant);
-
-  const chosen = pokemon.length > 0 ? pokemon : withLinks;
+  const chosen = withLinks.filter(isPokemonRelevant);
 
   fs.mkdirSync(path.dirname(outFile), { recursive: true });
   fs.writeFileSync(outFile, JSON.stringify(chosen, null, 2), "utf-8");
 
+  if (chosen.length === 0 && withLinks.length > 0) {
+    console.warn(
+      "[ingest-feed] ADVARSEL: 0 Pokémon-varer efter filter — products.json er tom. Tjek feeds eller filter.",
+    );
+  }
+
   console.log(
-    `[ingest-feed] Skrev ${chosen.length} produkter til data/products.json (feeds: ${entries.length}, rækker: ${allMapped.length}, med link: ${withLinks.length}, pokemon-filter: ${pokemon.length}).`,
+    `[ingest-feed] Skrev ${chosen.length} Pokémon-produkter til data/products.json (feeds: ${entries.length}, rækker: ${allMapped.length}, med link: ${withLinks.length}, efter Pokémon-filter: ${chosen.length}).`,
   );
 }
 
