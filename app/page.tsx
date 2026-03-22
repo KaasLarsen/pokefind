@@ -2,6 +2,7 @@ import Link from "next/link";
 import { categories, guides } from "../src/lib/content";
 import HeroSearch from "../src/components/HeroSearch";
 import HomeQuickNav from "../src/components/HomeQuickNav";
+import PartnerAdsDisplayBanner from "../src/components/PartnerAdsDisplayBanner";
 import HowItWorks from "../src/components/HowItWorks";
 import ProductCard from "../src/components/ProductCard";
 import SectionTitle from "../src/components/SectionTitle";
@@ -16,6 +17,8 @@ export default function HomePage() {
   return (
     <div className="space-y-14 md:space-y-16">
       <HeroSearch />
+
+      <PartnerAdsDisplayBanner />
 
       <HomeQuickNav />
 

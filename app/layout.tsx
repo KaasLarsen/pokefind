@@ -5,6 +5,7 @@ import "./globals.css";
 import CookieConsentBanner from "../src/components/CookieConsentBanner";
 import ClickAnalytics from "../src/components/ClickAnalytics";
 import SiteHeader from "../src/components/SiteHeader";
+import PartnerAdsDisplayBanner from "../src/components/PartnerAdsDisplayBanner";
 import { PokeFindLogo } from "../src/components/PokeFindLogo";
 import { siteUrl } from "../src/lib/site";
 
@@ -88,6 +89,7 @@ export default function RootLayout({
 
           <footer className="mt-auto min-w-0 overflow-x-hidden border-t border-pk-navy/10 bg-pk-navy text-white/90">
             <div className="mx-auto min-w-0 max-w-6xl px-4 py-8 text-sm">
+              <PartnerAdsDisplayBanner variant="footer" className="mb-8" />
               <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
                 <div className="flex gap-3">
                   <PokeFindLogo variant="mark" className="h-10 w-10 shrink-0" />
