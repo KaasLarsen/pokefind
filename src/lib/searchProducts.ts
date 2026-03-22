@@ -4,6 +4,18 @@ import type { ProductRecord } from "./productTypes";
 
 const products = productsData as ProductRecord[];
 
+const productById = new Map(products.map((p) => [p.id, p]));
+
+/** Hent produkter efter id i samme rækkefølge som angivet (spring over ukendte id’er). */
+export function getProductsByIds(ids: string[]): ProductRecord[] {
+  const out: ProductRecord[] = [];
+  for (const id of ids) {
+    const p = productById.get(id);
+    if (p) out.push(p);
+  }
+  return out;
+}
+
 function normalize(s: string) {
   return s.toLowerCase().trim();
 }

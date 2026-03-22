@@ -2,11 +2,14 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { AffiliateDisclosureBox } from "../../../src/components/AffiliateDisclosureBox";
 import { AffiliateLink } from "../../../src/components/AffiliateLink";
+import ProductCard from "../../../src/components/ProductCard";
+import SectionTitle from "../../../src/components/SectionTitle";
 import {
   affiliateProviders,
   categories,
   guides,
 } from "../../../src/lib/content";
+import { getProductsByIds } from "../../../src/lib/searchProducts";
 
 export function generateStaticParams() {
   return guides.map((g) => ({ slug: g.slug }));
@@ -20,6 +23,11 @@ export default function GuidePage({ params }: { params: { slug: string } }) {
   const recommendedCategories = guide.recommendedCategorySlugs
     .map((slug) => categories.find((c) => c.slug === slug))
     .filter((c): c is (typeof categories)[number] => c != null);
+
+  const featuredProducts =
+    guide.featuredProductIds?.length ?
+      getProductsByIds(guide.featuredProductIds)
+    : [];
 
   return (
     <div>
@@ -43,6 +51,31 @@ export default function GuidePage({ params }: { params: { slug: string } }) {
           ))}
         </ol>
       </div>
+
+      {featuredProducts.length > 0 ? (
+        <section className="mt-10" aria-label="Udvalgte produkter fra kataloget">
+          <SectionTitle
+            kicker="Fra kataloget"
+            title="Udvalgte produkter i denne guide"
+            subtitle={
+              guide.featuredProductsIntro ??
+              "Konkrete varer fra vores produktfeed — klik for at gå til butikken (reklamelinks)."
+            }
+          />
+          <ul className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+            {featuredProducts.map((p, i) => (
+              <li key={p.id}>
+                <ProductCard product={p} imagePriority={i === 0} />
+              </li>
+            ))}
+          </ul>
+          <p className="mt-4 text-xs text-pk-navy/55">
+            Udvalget er redaktionelt og knytter sig til guidens emne. Produkt-ID’er
+            vedligeholdes i <code className="rounded bg-pk-navy/5 px-1">src/lib/content.ts</code>{" "}
+            og matcher <code className="rounded bg-pk-navy/5 px-1">data/products.json</code>.
+          </p>
+        </section>
+      ) : null}
 
       <div className="mt-8">
         <h2 className="font-display text-xl font-bold text-pk-navy">

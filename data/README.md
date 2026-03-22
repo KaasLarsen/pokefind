@@ -5,6 +5,12 @@
 
 Hvis I mener der mangler feeds i `feeds.json`, så kopier de resterende URL’er ind fra Partner-ads — de kan ikke altid genskabes fra chat-historik.
 
+## Guides med fremhævede produkter
+
+I `src/lib/content.ts` kan hver guide have **`featuredProductIds`**: en liste af streng-id’er der findes i `products.json` (samme som feltet `id` på hvert produkt). Bruges til at vise **produktkort** på `/guider/[slug]`.
+
+Efter et nyt ingest: tjek at id’erne stadig findes — ellers opdatér listen eller fjern udløbne varer.
+
 ## Billeder fra feeds
 
 - Ingest-scriptet lægger billed-URL’er i feltet **`imageUrl`** pr. produkt (se `ProductRecord` i `src/lib/productTypes.ts`).

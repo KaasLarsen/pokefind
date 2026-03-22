@@ -32,6 +32,13 @@ export type Guide = {
   audience: Exclude<Audience, "børn">;
   recommendedCategorySlugs: string[];
   steps: { heading: string; body: string }[];
+  /**
+   * Produkt-ID’er fra `data/products.json` (fx efter ingest-feed).
+   * Vises som produktkort i guiden — godt til konkrete boosters, sleeves, osv.
+   */
+  featuredProductIds?: string[];
+  /** Valgfri introtekst over produktgitteret */
+  featuredProductsIntro?: string;
 };
 
 export type AffiliateProvider = {
@@ -213,12 +220,47 @@ export const categories: Category[] = [
 
 export const guides: Guide[] = [
   {
+    id: "guide-produkteksempler-feed",
+    slug: "produkteksempler-fra-kataloget",
+    title: "Produkteksempler fra kataloget (boosters & tilbehør)",
+    summary:
+      "Konkrete varer fra vores feed — se forskel på booster packs, sleeves og mere.",
+    audience: "begynder",
+    recommendedCategorySlugs: ["booster-packs", "sleeves-protectors", "single-cards"],
+    featuredProductIds: [
+      "feed-2514-54243",
+      "feed-2514-63860",
+      "feed-2514-15894",
+      "feed-2514-51644",
+      "feed-2514-18919",
+    ],
+    featuredProductsIntro:
+      "Udpluk fra det aktuelle varekatalog (Partner-ads feeds). Priser og lager følger butikken; links er reklame.",
+    steps: [
+      {
+        heading: "Hvorfor vise rigtige produkter?",
+        body: "Tekst om formater giver mening først når du også kan se emballage og type — fx en klassisk booster pack vs. sleeves til beskyttelse.",
+      },
+      {
+        heading: "Sådan opdaterer du listen",
+        body: "Kør `npm run ingest:feed` for friske data. I `src/lib/content.ts` kan du ændre `featuredProductIds` til andre `id`-værdier fra `data/products.json`.",
+      },
+    ],
+  },
+  {
     id: "guide-begynder-køb",
     slug: "hvad-skal-jeg-koebe-som-begynder",
     title: "Hvad skal jeg købe som nybegynder?",
     summary: "Booster packs vs ETB vs enkeltkort: sådan vælger du hurtigt det rigtige.",
     audience: "begynder",
     recommendedCategorySlugs: ["etb", "booster-packs", "single-cards", "sleeves-protectors"],
+    featuredProductIds: [
+      "feed-2514-54243",
+      "feed-2514-63860",
+      "feed-2514-51644",
+    ],
+    featuredProductsIntro:
+      "Eksempler på booster packs og sleeves fra kataloget — supplerer rådene nedenfor.",
     steps: [
       {
         heading: "Start med formatet (hvad vil du have ud af købet?)",
@@ -241,6 +283,9 @@ export const guides: Guide[] = [
     summary: "Sammenlign format, kort pr. krone (princip) og “hvad du får” i praksis.",
     audience: "begynder",
     recommendedCategorySlugs: ["booster-boxes", "etb", "single-cards", "deck-boxes-binders"],
+    featuredProductIds: ["feed-2514-54243", "feed-2514-63860", "feed-2514-15894"],
+    featuredProductsIntro:
+      "Tre forskellige Pokémon booster packs fra kataloget — til sammenligning af emballage og æra (priser varierer).",
     steps: [
       {
         heading: "Booster box = volumen og samlerglæde",
@@ -285,6 +330,9 @@ export const guides: Guide[] = [
     summary: "En praktisk guide til at holde kortene fine, uanset om du spiller eller samler.",
     audience: "begynder",
     recommendedCategorySlugs: ["sleeves-protectors", "deck-boxes-binders", "playmats"],
+    featuredProductIds: ["feed-2514-51644", "feed-2514-51640", "feed-2514-18919"],
+    featuredProductsIntro:
+      "Eksempler på Ultra Pro sleeves (50-pakker) fra kataloget — gode til Pokémon-kort i standardstørrelse.",
     steps: [
       {
         heading: "Sleeves: den hurtigste investering",
