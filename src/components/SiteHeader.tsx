@@ -49,6 +49,12 @@ export default function SiteHeader() {
           >
             Guider
           </Link>
+          <Link
+            href="/faq"
+            className="rounded-full border border-white/10 px-3 py-2 transition hover:border-pk-electric/40 hover:bg-white/10"
+          >
+            FAQ
+          </Link>
         </nav>
       </div>
     </header>

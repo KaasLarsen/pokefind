@@ -146,6 +146,22 @@ export default function CategoryPage({
         </div>
       </header>
 
+      {category.longBody ?
+        <section
+          className="rounded-2xl border border-pk-blue/12 bg-white/90 p-6 shadow-sm md:p-8"
+          aria-label={`Mere om ${category.title}`}
+        >
+          <h2 className="font-display text-lg font-bold text-pk-navy md:text-xl">
+            Om {category.title.toLowerCase()}
+          </h2>
+          <div className="mt-4 space-y-3 text-sm leading-relaxed text-pk-navy/85 md:text-base">
+            {category.longBody.split(/\n\n+/).filter(Boolean).map((para, i) => (
+              <p key={i}>{para}</p>
+            ))}
+          </div>
+        </section>
+      : null}
+
       <section className="pk-card ring-1 ring-pk-blue/10">
         <div className="pk-card-inner">
           <SectionTitle

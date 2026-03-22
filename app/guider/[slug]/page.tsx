@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { AffiliateDisclosureBox } from "../../../src/components/AffiliateDisclosureBox";
@@ -13,6 +14,27 @@ import { getProductsByIds } from "../../../src/lib/searchProducts";
 
 export function generateStaticParams() {
   return guides.map((g) => ({ slug: g.slug }));
+}
+
+export function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}): Metadata {
+  const guide = guides.find((g) => g.slug === params.slug);
+  if (!guide) {
+    return { title: "Guide — PokéFind" };
+  }
+  return {
+    title: `${guide.title} — PokéFind`,
+    description: guide.summary,
+    openGraph: {
+      title: `${guide.title} — PokéFind`,
+      description: guide.summary,
+      type: "article",
+      locale: "da_DK",
+    },
+  };
 }
 
 export default function GuidePage({ params }: { params: { slug: string } }) {
@@ -47,6 +69,16 @@ export default function GuidePage({ params }: { params: { slug: string } }) {
             <li key={s.heading}>
               <div className="font-semibold text-pk-navy">{s.heading}</div>
               <div className="mt-1 text-pk-navy/75">{s.body}</div>
+              {s.readMore ? (
+                <div className="mt-2">
+                  <Link
+                    href={s.readMore.href}
+                    className="text-sm font-semibold text-pk-blue hover:underline"
+                  >
+                    {s.readMore.label} →
+                  </Link>
+                </div>
+              ) : null}
             </li>
           ))}
         </ol>

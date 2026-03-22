@@ -18,10 +18,19 @@ export type Category = {
   slug: string;
   title: string;
   description: string;
+  /** Valgfri længere SEO-tekst (afsnit adskilles med dobbelt linjeskift). */
+  longBody?: string;
   searchKeywords: string[]; // used to build outbound search links
   formats: Format[];
   audiences: Audience[];
   priceTiers?: PriceTier[];
+};
+
+export type GuideStep = {
+  heading: string;
+  body: string;
+  /** Valgfrit link til relevant kategori/guide på PokéFind */
+  readMore?: { href: string; label: string };
 };
 
 export type Guide = {
@@ -31,7 +40,7 @@ export type Guide = {
   summary: string;
   audience: Exclude<Audience, "børn">;
   recommendedCategorySlugs: string[];
-  steps: { heading: string; body: string }[];
+  steps: GuideStep[];
   /**
    * Produkt-ID’er fra `data/products.json` (fx efter ingest-feed).
    * Vises som produktkort i guiden — godt til konkrete boosters, sleeves, osv.
@@ -90,6 +99,8 @@ export const categories: Category[] = [
     title: "Booster packs",
     description:
       "Små, sjove pakker til overraskelser. Perfekt når du vil i gang uden at bruge en stor sum.",
+    longBody:
+      "En booster pack er den klassiske måde at få nye kort på i Pokémon TCG: du ved, at du får et lille udpluk fra den pågældende serie, men ikke præcis hvilke kort. Det gør dem ideelle til at starte en samling, mærke spillet eller give som gave uden at skulle kende alle kortnavne på forhånd.\n\nTypiske fejl er at forveksle booster packs med blisters, tins eller ETB — de kan ligne hinanden i søgeresultater, men indeholder forskellige mængder og tilbehør. Tjek altid produktnavn og hvad der står på emballagen om antal boosters og eventuelle promo-kort.\n\nVælg booster packs, når du vil have flest “træk” for pengene i små bidder, eller når du samler en bestemt udvidelse og vil åbne flere pakker over tid.",
     searchKeywords: ["pokemon booster pack", "pokemon booster packs"],
     formats: ["booster-pack"],
     audiences: ["børn", "begynder"],
@@ -101,6 +112,8 @@ export const categories: Category[] = [
     title: "Booster boxes / displays",
     description:
       "Når du vil have mange boosters i én investering. Typisk favorit blandt dedikerede samlere.",
+    longBody:
+      "En booster box (eller display) indeholder typisk mange enkelt-boosters fra samme serie. Det er derfor et favoritformat blandt samlere, der vil bygge bredt, lede efter sjældne træk eller dele oplevelsen med venner over flere åbnings-sessioner.\n\nØkonomisk handler det ofte om “mange træk på én gang” frem for at købe enkeltpakker ad gangen — men det er stadig tilfældighed, så du bør være komfortabel med varians. En box er sjældent “garanti” for bestemte kort.\n\nKøb typisk en booster box, når du allerede ved, at du elsker en given udvidelse, eller når du vil spare tid og fragt ved at handle ét stort køb frem for mange små.",
     searchKeywords: ["pokemon booster box", "pokemon booster display"],
     formats: ["booster-box"],
     audiences: ["erfaren", "begynder"],
@@ -112,6 +125,8 @@ export const categories: Category[] = [
     title: "Elite Trainer Boxes (ETB)",
     description:
       "En “alt-i-en” løsning med booster packs + ekstra tilbehør. God værdi til både samling og startpakker.",
+    longBody:
+      "En Elite Trainer Box samler ofte flere booster packs med tilbehør som terning, markører og æske — alt sammen i ét samlet produkt. For mange begyndere er det et nemt første køb, fordi du får både kort og praktiske ting til at komme i gang ved bordet.\n\nSammenlignet med rene booster packs betaler du for “pakken” og oplevelsen, ikke kun for antal boosters. Det kan stadig være god værdi, især hvis du alligevel manglede sleeves, terning eller opbevaring.\n\nVælg en ETB, når du vil give en komplet gave, starte et nyt sæt, eller når du vil have struktur og tilbehør uden at skulle købe det hele separat.",
     searchKeywords: ["pokemon elite trainer box", "pokemon etb"],
     formats: ["etb"],
     audiences: ["begynder", "børn"],
@@ -123,6 +138,8 @@ export const categories: Category[] = [
     title: "Blister packs",
     description:
       "Ofte 1 booster + et ekstra promo-element. God mellemting mellem booster packs og større bokse.",
+    longBody:
+      "Et blister pack er typisk én booster (eller to) pakket ind på en pap-plade, ofte med et promo-kort, mønt eller lignende. Det er et mellemformat: billigere end en stor æske, men ofte lidt dyrere “pr. booster” end hvis du køber en hel box — til gengæld får du tit et fast promo-kort, som samlere går efter.\n\nDet er let at forveksle med almindelige løse boosters: læs beskrivelsen, så du ved om promo-kortet følger med, og hvilken serie boosteren tilhører.\n\nVælg blisters, når du vil have et bestemt promo, en lille gave, eller et hurtigt køb uden at investere i en hel display.",
     searchKeywords: ["pokemon blister pack", "pokemon blister packs"],
     formats: ["blister"],
     audiences: ["begynder", "børn"],
@@ -145,6 +162,8 @@ export const categories: Category[] = [
     title: "Enkeltkort",
     description:
       "Når du vil vælge præcis det kort du mangler (eller bygge et deck målrettet).",
+    longBody:
+      "Enkeltkort (singles) er den direkte vej til præcis det kort, du mangler til et deck eller til samlingen. I modsætning til boosters undgår du tilfældighed — til gengæld betaler du ofte efter efterspørgsel og stand.\n\nNår du handler singles, er det vigtigt at være opmærksom på sprogudgave, stand og om kortet er lovligt i det format, du spiller (fx Standard-regler skifter over tid).\n\nVælg enkeltkort, når du har en konkret liste til dit deck, eller når du vil udfylde huller efter at have åbnet boosters.",
     searchKeywords: ["pokemon singles", "pokemon card singles"],
     formats: ["single-card"],
     audiences: ["erfaren", "begynder"],
@@ -156,6 +175,8 @@ export const categories: Category[] = [
     title: "Sleeves & protectors",
     description:
       "Sådan beskytter du dine kort mod slid. For mange er sleeves det vigtigste “før køb”.",
+    longBody:
+      "Sleeves (kortlommer) beskytter mod fingeraftryk, kanter og små ridser — især hvis du både spiller og bytter. Standard størrelse til Pokémon TCG passer til de fleste almindelige kort, men dobbelttjek, hvis du har jumbo- eller specielle kort.\n\nMange køber for få sleeves første gang: regn med et deck, ekstra kort og lidt reserve. Det er billigere at købe en æske end mange små pakker over tid.\n\nInvestér i sleeves tidligt, hvis du åbner boosters og allerede ved, at du vil spille eller opbevare kortene længe — det er ofte den bedste “forsikring” for dine træk.",
     searchKeywords: ["pokemon card sleeves", "pokemon card protectors"],
     formats: ["accessory-sleeves"],
     audiences: ["begynder", "erfaren"],
@@ -224,7 +245,7 @@ export const guides: Guide[] = [
     slug: "produkteksempler-fra-kataloget",
     title: "Produkteksempler fra kataloget (boosters & tilbehør)",
     summary:
-      "Konkrete varer fra vores feed — se forskel på booster packs, sleeves og mere.",
+      "Se rigtige varer fra vores varekatalog side om side: emballage, prisniveau og type — så lettere at forstå forskellen på boosters, sleeves og mere end ren teori alene.",
     audience: "begynder",
     recommendedCategorySlugs: ["booster-packs", "sleeves-protectors", "single-cards"],
     featuredProductIds: [
@@ -239,11 +260,20 @@ export const guides: Guide[] = [
     steps: [
       {
         heading: "Hvorfor vise rigtige produkter?",
-        body: "Tekst om formater giver mening først når du også kan se emballage og type — fx en klassisk booster pack vs. sleeves til beskyttelse.",
+        body:
+          "Når du læser om “booster packs” og “sleeves”, er det nemmere at vælge rigtigt, hvis du også kan se billeder, titler og prisniveau fra rigtige lister. Nedenfor ser du konkrete produkter fra vores katalog — ikke anbefalinger fra ét mærke, men eksempler du kan sammenligne med det, du selv leder efter.",
+        readMore: { href: "/kat/booster-packs", label: "Se kategorien Booster packs" },
       },
       {
-        heading: "Sådan opdaterer du listen",
-        body: "Kør `npm run ingest:feed` for friske data. I `src/lib/content.ts` kan du ændre `featuredProductIds` til andre `id`-værdier fra `data/products.json`.",
+        heading: "Sådan læser du produktkortene",
+        body:
+          "Hvert kort viser navn, pris (når feedet leverer den), butik og et link videre. Brug listen til at mærke forskellen: nogle varer er rene boosters, andre er tilbehør som sleeves. Er du i tvivl om formatet, åbn butikkens side og læs den fulde beskrivelse før du køber.",
+        readMore: { href: "/soeg", label: "Søg i hele kataloget" },
+      },
+      {
+        heading: "Sådan opdaterer du listen (for udviklere)",
+        body:
+          "Kataloget opdateres med `npm run ingest:feed`, som henter Partner-ads-feeds og skriver `data/products.json`. Redaktionelle udvalg i guides styres med `featuredProductIds` i `src/lib/content.ts` — brug `id`-felterne fra produktfilen, så kortene matcher.",
       },
     ],
   },
@@ -251,7 +281,8 @@ export const guides: Guide[] = [
     id: "guide-begynder-køb",
     slug: "hvad-skal-jeg-koebe-som-begynder",
     title: "Hvad skal jeg købe som nybegynder?",
-    summary: "Booster packs vs ETB vs enkeltkort: sådan vælger du hurtigt det rigtige.",
+    summary:
+      "Tre hurtige valg: vil du have overraskelse (boosters), en samlet startpakke (ETB) eller præcise kort (singles)? Her får du en beslutningsramme, så du ikke køber “tilfældigt” i webshoppens søgefelt.",
     audience: "begynder",
     recommendedCategorySlugs: ["etb", "booster-packs", "single-cards", "sleeves-protectors"],
     featuredProductIds: [
@@ -263,16 +294,28 @@ export const guides: Guide[] = [
       "Eksempler på booster packs og sleeves fra kataloget — supplerer rådene nedenfor.",
     steps: [
       {
-        heading: "Start med formatet (hvad vil du have ud af købet?)",
-        body: "Vil du have overraskelser, en samlet start eller præcise kort? Vælg derefter: ETB (værdi + tilbehør), booster packs (budget + sjov) eller enkeltkort (målrettet).",
+        heading: "Start med målet: spil, samling eller gave?",
+        body:
+          "Skal du spille mod venner, samle en bestemt serie, eller give en gave? Spil og deckbuilding belønner ofte enkeltkort eller målrettede køb. Ren samler-glæde og “at åbne pakker” passer godt til booster packs. En gave, der skal føles komplet, er ofte nemmere som ETB eller tin — færre løse dele at forklare.",
+        readMore: { href: "/guider/booster-box-vs-etb-vs-enkeltkort", label: "Sammenlign formater dybere" },
       },
       {
-        heading: "Tænk beskyttelse tidligt",
-        body: "Sleeves er ofte den bedste “før du får sjældne kort”-investering. Det gør det lettere at samle og handle senere.",
+        heading: "Vælg format: ETB, boosters eller singles",
+        body:
+          "Elite Trainer Boxes samler typisk flere boosters og tilbehør i én æske — godt hvis du vil have struktur. Løse booster packs er billigere pr. beslutning og giver små “højdepunkter”. Enkeltkort er bedst, når du allerede ved præcis hvilke kort dit deck mangler. Der findes ikke ét rigtigt svar; det rigtige er det, der matcher dit budget og tålmodighed med tilfældighed.",
+        readMore: { href: "/kat/etb", label: "Udforsk Elite Trainer Boxes" },
       },
       {
-        heading: "Gør det nemt for barnet/begynderen",
-        body: "Starter-bundles og tins kan gøre hobbyen mere overskuelig (færre valg, mere klar pakkeværdi).",
+        heading: "Tænk beskyttelse og opbevaring tidligt",
+        body:
+          "Sleeves og en simpel deck box koster lidt i forhold til værdien af de kort, du vil beholde. Selv som nybegynder er det en god vane at sleeve kort, du spiller med — det gør dem lettere at bytte eller sælge senere.",
+        readMore: { href: "/kat/sleeves-protectors", label: "Se sleeves og protectors" },
+      },
+      {
+        heading: "Gør det overskueligt for børn",
+        body:
+          "Til børn kan tins og klar-til-gave-pakker føles mindre overvældende end at skulle vælge mellem mange små produkter. Vælg noget med tydelig indholdsbeskrivelse på emballagen, så forventningerne matcher det, der ligger i pakken.",
+        readMore: { href: "/kat/tins", label: "Se tins og collection boxes" },
       },
     ],
   },
@@ -280,7 +323,8 @@ export const guides: Guide[] = [
     id: "guide-værdi-sammenligning",
     slug: "booster-box-vs-etb-vs-enkeltkort",
     title: "Booster box vs ETB vs enkeltkort: hvad giver mest værdi?",
-    summary: "Sammenlign format, kort pr. krone (princip) og “hvad du får” i praksis.",
+    summary:
+      "“Værdi” betyder forskellige ting: flest træk for pengene, færrest skuffelser, eller hurtigst fra idé til færdigt deck. Her er en praktisk inddeling uden at love faste priser — de ændrer sig med marked og butik.",
     audience: "begynder",
     recommendedCategorySlugs: ["booster-boxes", "etb", "single-cards", "deck-boxes-binders"],
     featuredProductIds: ["feed-2514-54243", "feed-2514-63860", "feed-2514-15894"],
@@ -288,16 +332,27 @@ export const guides: Guide[] = [
       "Tre forskellige Pokémon booster packs fra kataloget — til sammenligning af emballage og æra (priser varierer).",
     steps: [
       {
-        heading: "Booster box = volumen og samlerglæde",
-        body: "Når du vil trække mange kort, og du er ok med tilfældigheden. God til at bygge bredt over tid.",
+        heading: "Booster box: mange træk, én beslutning",
+        body:
+          "En booster box giver typisk mange boosters fra samme serie. Den giver ofte “mest at åbne” i forhold til at købe enkelte pakker ad gangen — men det er stadig tilfældighed. God til samlere, der vil bredde, eller som vil dele åbninger over tid. Dårlig til at garantere bestemte kort.",
+        readMore: { href: "/kat/booster-boxes", label: "Se booster boxes" },
       },
       {
-        heading: "ETB = værdi + organiseret start",
-        body: "ETB’er giver ofte mere “pakkeoplevelse” og tilbehør. Perfekt hvis du vil have en stram startpakke.",
+        heading: "ETB: samlet pakke med tilbehør",
+        body:
+          "En ETB kombinerer ofte flere boosters med terning, markører og æske. Du betaler for helhedsoplevelsen — ikke kun for antal boosters. Mange oplever det som bedre “startpakke-værdi” end løse boosters, især hvis tilbehøret alligevel stod på ønskelisten.",
+        readMore: { href: "/kat/etb", label: "Se Elite Trainer Boxes" },
       },
       {
-        heading: "Enkeltkort = målrettet deckbuilding",
-        body: "Hvis du vil bygge et deck og mangle specifikke kort, så er enkeltkort typisk den mest effektive vej.",
+        heading: "Enkeltkort: betal for sikkerhed, ikke for overraskelse",
+        body:
+          "Singles er ofte den hurtigste vej til et spilleklart deck: du betaler for kortene du mangler, ikke for tilfældige træk. Det kan føles “dyrere pr. kort”, men billigere end at åbne boosters indtil du tilfældigvis rammer det rigtige. Tjek sprog og stand før du køber.",
+        readMore: { href: "/kat/single-cards", label: "Se enkeltkort-kategorien" },
+      },
+      {
+        heading: "Hvad skal du vælge?",
+        body:
+          "Vil du maksimere spænding og samleroplevelse, er boosters/boxes stærke. Vil du minimere spild og bygge konkret, er singles stærke. Vil du have en balanceret gave eller start, er ETB ofte midten.",
       },
     ],
   },
@@ -305,21 +360,33 @@ export const guides: Guide[] = [
     id: "guide-undgå-forkert-køb",
     slug: "sadan-undgar-du-at-koebe-det-forkerte",
     title: "Sådan undgår du at købe det forkerte kort/produkt",
-    summary: "Små fejl (forkert type, forkert behov) koster typisk mest i “frustration”, ikke kun kroner.",
+    summary:
+      "De dyreste fejl er ofte dem, hvor produktet er “korrekt” i sig selv — men forkert til dit behov. Her er et tjekliste-tænk, der sparer både tid og ærgrelse.",
     audience: "begynder",
     recommendedCategorySlugs: ["single-cards", "starter-bundles", "sleeves-protectors"],
     steps: [
       {
-        heading: "Start med “brugsscenariet”",
-        body: "Spil (deckbuilding) eller samle (display)? Løsningen skal passe til, hvad der giver glæde næste uge, ikke kun næste måned.",
+        heading: "Definér brugsscenariet først",
+        body:
+          "Skal kortene spilles i turnering, lægges i et album, eller gives væk? Spil kræver ofte bestemte formater og sprogudgaver. Samling handler mere om stand og æstetik. Når du ved det, kan du filtrere 90 % af forkerte tilbud væk, før du læser produktteksten.",
+        readMore: { href: "/faq", label: "Læs FAQ om katalog og links" },
       },
       {
-        heading: "Tjek format før du trykker køb",
-        body: "Booster packs, blisters, ETB og tins føles ens i søgning, men opleves meget forskelligt i indhold og værdi.",
+        heading: "Læs navnet på formatet — ikke kun billedet",
+        body:
+          "Webshops viser ofte store billeder af æsker, men forskellen mellem blister, ETB, tin og løs booster står i titlen og beskrivelsen. To produkter kan ligne hinanden visuelt men indeholde forskelligt antal boosters eller promo-kort. Scroll ned og læs, hvad der faktisk er i kassen.",
+        readMore: { href: "/kat/blister-packs", label: "Se blister-packs" },
       },
       {
-        heading: "Køb beskyttelse samtidig",
-        body: "Hvis du køber enkeltkort eller graded cards, så planlæg sleeves/protectors først eller samtidig.",
+        heading: "Tjek sprog, serie og kompatibilitet",
+        body:
+          "Pokémon TCG findes på flere sprog; til turnering i Danmark er det typisk vigtigt at matche det, du spiller med. Serienavnet (fx hvilket sæt) afgør, hvilke kort der kan forekomme. Er du i tvivl, søg seriens navn og “indhold” før du betaler.",
+      },
+      {
+        heading: "Køb beskyttelse i samme ombæring",
+        body:
+          "Har du fundet et enkeltkort eller en dyrere pakke, er sleeves billig forsikring. Det er lettere at købe rigtigt første gang end at erstatte ridser senere — især hvis du handler videre eller bytter.",
+        readMore: { href: "/kat/sleeves-protectors", label: "Se sleeves" },
       },
     ],
   },
@@ -327,7 +394,8 @@ export const guides: Guide[] = [
     id: "guide-sleeves",
     slug: "sleeves-og-opbevaring-hvad-du-bruger",
     title: "Sleeves og opbevaring: hvad skal du bruge og hvorfor?",
-    summary: "En praktisk guide til at holde kortene fine, uanset om du spiller eller samler.",
+    summary:
+      "Fra første sleeve til deck box og playmat: sådan prioriterer du udstyr, så dine kort holder til både hverdagskampe og samling — uden at købe unødigt.",
     audience: "begynder",
     recommendedCategorySlugs: ["sleeves-protectors", "deck-boxes-binders", "playmats"],
     featuredProductIds: ["feed-2514-51644", "feed-2514-51640", "feed-2514-18919"],
@@ -335,16 +403,27 @@ export const guides: Guide[] = [
       "Eksempler på Ultra Pro sleeves (50-pakker) fra kataloget — gode til Pokémon-kort i standardstørrelse.",
     steps: [
       {
-        heading: "Sleeves: den hurtigste investering",
-        body: "Hvis et kort er “sejt”, så er det også et kort du ikke vil beskadige. Sleeves beskytter mod hverdagens slid.",
+        heading: "Sleeves først: beskyttelse mod slid og kanter",
+        body:
+          "Standard Pokémon-kort passer i almindelige “standard size” sleeves. De beskytter mod fingeraftryk og små ridser når du stokker og spiller. Overvej “inner sleeve” + ydre sleeve kun hvis du samler høj stand eller investerer i dyre kort — til almindelig leg rækker ofte én kvalitetssleeve.",
+        readMore: { href: "/kat/sleeves-protectors", label: "Find sleeves i kataloget" },
       },
       {
-        heading: "Opbevaring: binders/deck boxes",
-        body: "Binders til samling og deck boxes til spil giver hver deres fordel i hverdagen.",
+        heading: "Deck box: transport og ét sted at samle decket",
+        body:
+          "En deck box holder dit spilledeck samlet og beskytter mod bøjning. Vælg én der kan rumme sleevede kort — nogle budgetæsker er for stramme. Har du flere decks, mærker du dem gerne med farve eller navn på æsken.",
+        readMore: { href: "/kat/deck-boxes-binders", label: "Se deck boxes og binders" },
       },
       {
-        heading: "Playmat til bord-oplevelsen",
-        body: "En playmat gør det lettere at holde styr på turneringen, energier og placering af kort.",
+        heading: "Binder og opbevaring til samlingen",
+        body:
+          "Til sæt du ikke spiller hver dag, giver ringbind med lommer mening: overskueligt og pænt. Vær opmærksom på at kort ikke bør sidde for stramt eller bøjes når du bladrer.",
+      },
+      {
+        heading: "Playmat: komfort og tydeligt spilleområde",
+        body:
+          "En playmat er ikke “påkrævet”, men den beskytter bordet og gør det lettere at holde styr på kort og zoner. Mange spillere køber den, når de er sikre på at de vil spille ofte — det er et godt andet skridt efter sleeves.",
+        readMore: { href: "/kat/playmats", label: "Se playmats" },
       },
     ],
   },

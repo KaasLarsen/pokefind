@@ -124,6 +124,10 @@ export default function RootLayout({
                       Om
                     </a>
                     <span className="text-white/40">·</span>
+                    <a className="underline hover:text-pk-yellow" href="/faq">
+                      FAQ
+                    </a>
+                    <span className="text-white/40">·</span>
                     <a className="underline hover:text-pk-yellow" href="/kontakt">
                       Kontakt
                     </a>
