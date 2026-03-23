@@ -11,6 +11,7 @@ import {
 import { useRouter } from "next/navigation";
 import { getSuggestions, type SuggestionItem } from "../lib/suggestions";
 import { IconBook, IconBolt, IconPackage, IconSearch } from "./icons";
+import { PokeFindLogo } from "./PokeFindLogo";
 
 type Variant = "hero" | "header";
 
@@ -176,7 +177,7 @@ export default function SearchBar({
             {isHero ? (
               <IconBolt className="h-7 w-7 drop-shadow-sm" />
             ) : (
-              <IconSearch className="h-5 w-5" />
+              <PokeFindLogo variant="mark" className="h-5 w-5" />
             )}
           </span>
           <input
