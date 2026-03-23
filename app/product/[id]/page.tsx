@@ -7,6 +7,8 @@ import { IconPackage } from "../../../src/components/icons";
 import { buildProductJsonLd } from "../../../src/lib/structuredData";
 import { getIndexableProductIds, getProductById } from "../../../src/lib/searchProducts";
 import { siteUrl } from "../../../src/lib/site";
+import ProductCard from "../../../src/components/ProductCard";
+import { getRelatedProducts } from "../../../src/lib/searchProducts";
 
 export function generateStaticParams() {
   return getIndexableProductIds().map((id) => ({ id }));
@@ -49,6 +51,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
   if (!product) notFound();
 
   const canonicalUrl = `${siteUrl}/product/${encodeURIComponent(product.id)}`;
+  const related = getRelatedProducts(product, 6);
 
   return (
     <div className="space-y-8">
@@ -131,6 +134,26 @@ export default function ProductPage({ params }: { params: { id: string } }) {
           </div>
         </div>
       </div>
+
+      {related.length > 0 && (
+        <section className="space-y-5">
+          <div>
+            <h2 className="font-display text-2xl font-extrabold text-pk-navy">
+              Relaterede produkter
+            </h2>
+            <p className="mt-1 text-sm text-pk-navy/75">
+              Match baseret på titel-lighed (og dermed ofte samme type produkt hos forskellige butikker).
+            </p>
+          </div>
+          <ul className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+            {related.map((p, i) => (
+              <li key={p.id}>
+                <ProductCard product={p} imagePriority={i === 0} />
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
     </div>
   );
 }

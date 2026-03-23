@@ -55,6 +55,55 @@ function normalize(s: string) {
   return s.toLowerCase().trim();
 }
 
+const TITLE_STOPWORDS = new Set([
+  "pokemon",
+  "pokémon",
+  "tcg",
+  "pokemon-tcg",
+  "og",
+  "med",
+  "til",
+  "for",
+  "fra",
+  "den",
+  "det",
+  "en",
+  "et",
+  "i",
+  "på",
+  "af",
+  "the",
+  "a",
+  "an",
+  "and",
+  "or",
+]);
+
+function tokenizeTitle(s: string): string[] {
+  const q = normalize(s);
+  const raw = q
+    .replace(/[^a-z0-9æøå\s-]/gi, " ")
+    .replace(/[\s-]+/g, " ")
+    .trim();
+  if (!raw) return [];
+
+  return raw
+    .split(" ")
+    .map((t) => t.trim())
+    .filter((t) => t.length >= 3 && !TITLE_STOPWORDS.has(t));
+}
+
+function jaccard(a: string[], b: string[]): number {
+  const A = new Set(a);
+  const B = new Set(b);
+  if (A.size === 0 || B.size === 0) return 0;
+
+  let intersection = 0;
+  for (const t of A) if (B.has(t)) intersection += 1;
+  const union = A.size + B.size - intersection;
+  return union === 0 ? 0 : intersection / union;
+}
+
 export function searchProducts(query: string, limit = 24): ProductRecord[] {
   const q = normalize(query);
   if (!q) return [];
@@ -68,6 +117,39 @@ export function searchProducts(query: string, limit = 24): ProductRecord[] {
   });
 
   return matches.slice(0, limit);
+}
+
+/**
+ * Relaterede produkter baseret på titel-lighed.
+ * Implementeret med 1-2 opslag via `searchProducts()` for at holde build-tid i check.
+ */
+export function getRelatedProducts(
+  product: ProductRecord,
+  limit = 6,
+): ProductRecord[] {
+  const titleTokens = tokenizeTitle(product.title);
+  if (!titleTokens.length) return [];
+
+  // Brug de mest “informative” tokens (længst først).
+  const sortedTokens = [...titleTokens].sort((a, b) => b.length - a.length);
+  const queries = sortedTokens.slice(0, 2);
+
+  const candidates = new Map<string, { p: ProductRecord; score: number }>();
+
+  for (const q of queries) {
+    const hits = searchProducts(q, Math.max(limit * 6, 24));
+    for (const p of hits) {
+      if (p.id === product.id) continue;
+      if (candidates.has(p.id)) continue;
+      const score = jaccard(titleTokens, tokenizeTitle(p.title));
+      if (score > 0) candidates.set(p.id, { p, score });
+    }
+  }
+
+  return [...candidates.values()]
+    .sort((a, b) => b.score - a.score || a.p.merchant.localeCompare(b.p.merchant))
+    .slice(0, limit)
+    .map((x) => x.p);
 }
 
 /**
