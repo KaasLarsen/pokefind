@@ -49,6 +49,21 @@
       "id": "feed-2085",
       "shopHint": "Bog & Ide",
       "url": "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=56431&bannerid=84909&feedid=2085"
+    },
+    {
+      "id": "feed-3302",
+      "shopHint": "Legekæden",
+      "url": "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=56431&bannerid=106350&feedid=3302"
+    },
+    {
+      "id": "feed-1677",
+      "shopHint": "Geekd",
+      "url": "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=56431&bannerid=74912&feedid=1677"
+    },
+    {
+      "id": "feed-2573",
+      "shopHint": "Gucca",
+      "url": "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=56431&bannerid=94931&feedid=2573"
     }
   ]
 }
