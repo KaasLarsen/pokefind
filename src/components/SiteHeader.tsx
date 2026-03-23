@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { PokeFindLogo } from "./PokeFindLogo";
 import SearchBar from "./SearchBar";
 import { IconMenu } from "./icons";
@@ -14,8 +14,6 @@ export default function SiteHeader() {
     pathname === "/soeg" ? (searchParams.get("q") ?? "") : "";
 
   const [menuOpen, setMenuOpen] = useState(false);
-  const menuPanelRef = useRef<HTMLDivElement | null>(null);
-  const menuButtonRef = useRef<HTMLButtonElement | null>(null);
 
   useEffect(() => {
     if (!menuOpen) return;
@@ -24,21 +22,9 @@ export default function SiteHeader() {
       if (e.key === "Escape") setMenuOpen(false);
     }
 
-    function onPointerDown(e: PointerEvent) {
-      const target = e.target as Node | null;
-      const panel = menuPanelRef.current;
-      const button = menuButtonRef.current;
-      if (!target) return;
-      if (panel?.contains(target)) return;
-      if (button?.contains(target)) return;
-      setMenuOpen(false);
-    }
-
     window.addEventListener("keydown", onKeyDown);
-    window.addEventListener("pointerdown", onPointerDown);
     return () => {
       window.removeEventListener("keydown", onKeyDown);
-      window.removeEventListener("pointerdown", onPointerDown);
     };
   }, [menuOpen]);
 
@@ -61,9 +47,8 @@ export default function SiteHeader() {
           />
         </div>
 
-        <nav className="relative flex items-center justify-end text-sm font-semibold text-white/90 lg:justify-end">
+        <nav className="flex flex-col items-end text-sm font-semibold text-white/90">
           <button
-            ref={menuButtonRef}
             type="button"
             aria-label={menuOpen ? "Luk menu" : "Åbn menu"}
             aria-expanded={menuOpen}
@@ -78,8 +63,7 @@ export default function SiteHeader() {
           {menuOpen && (
             <div
               id="site-header-menu"
-              ref={menuPanelRef}
-              className="absolute right-0 top-full z-50 mt-2 w-56 overflow-hidden rounded-2xl border border-white/10 bg-pk-navy/95 shadow-2xl shadow-pk-navy/30"
+              className="z-50 mt-2 w-56 overflow-hidden rounded-2xl border border-white/10 bg-pk-navy/95 shadow-2xl shadow-pk-navy/30"
             >
               <div className="flex flex-col gap-2 p-2">
                 <Link
