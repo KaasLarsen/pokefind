@@ -133,6 +133,15 @@ export default function RootLayout({
                     <a className="underline hover:text-pk-yellow" href="/kontakt">
                       Kontakt
                     </a>
+                    <span className="text-white/40">·</span>
+                    <a
+                      className="underline hover:text-pk-yellow"
+                      href="https://www.facebook.com/profile.php?id=61578666402500"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      Facebook
+                    </a>
                   </p>
                   <p className="mt-2">
                     <a className="underline hover:text-pk-yellow" href="/cookies">

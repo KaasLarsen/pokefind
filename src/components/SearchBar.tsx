@@ -150,7 +150,7 @@ export default function SearchBar({
 
   const iconWrapClass = isHero
     ? "pointer-events-none absolute left-5 top-1/2 -translate-y-1/2 text-pk-blue"
-    : "pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-pk-blue";
+    : "pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-pk-electric";
 
   return (
     <div ref={containerRef} className="relative w-full">

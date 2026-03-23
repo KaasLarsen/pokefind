@@ -64,6 +64,7 @@ export function PokeFindLogo({ variant = "wordmark", className = "" }: Props) {
       </span>
       <span className="font-display text-xl font-extrabold tracking-tight text-white">
         Poké<span className="text-pk-electric">Find</span>
+        <span className="text-pk-sky">.dk</span>
         <span className="ml-1 block text-xs font-normal text-white/70">
           Købsguide &amp; katalog
         </span>
