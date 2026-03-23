@@ -9,24 +9,38 @@ type Props = {
 };
 
 export default function ProductCard({ product, imagePriority = false }: Props) {
+  const affiliateLinkAttrs = {
+    href: product.affiliateUrl,
+    target: "_blank",
+    rel: "noreferrer sponsored nofollow",
+    "data-track": "affiliate_click",
+    "data-category-slug": "product-image",
+    "data-provider-id": product.feedSource,
+    "aria-label": `Åbn ${product.merchant} for "${product.title}"`,
+  } as const;
+
   return (
     <article className="pk-card group flex h-full flex-col transition duration-300 hover:-translate-y-1 hover:no-underline hover:shadow-2xl hover:shadow-pk-navy/20">
       <div className="pk-card-inner flex flex-1 flex-col space-y-3 pb-5 pt-5">
         {product.imageUrl ? (
-          <ProductCardImage
-            src={product.imageUrl}
-            alt={product.title}
-            priority={imagePriority}
-          />
+          <a {...affiliateLinkAttrs} className="block no-underline hover:opacity-95">
+            <ProductCardImage
+              src={product.imageUrl}
+              alt={product.title}
+              priority={imagePriority}
+            />
+          </a>
         ) : (
-          <div className="relative mx-auto flex h-40 w-full max-w-full items-center justify-center overflow-hidden rounded-2xl border border-pk-blue/10 bg-gradient-to-br from-pk-cream to-white ring-1 ring-black/[0.04] sm:h-44 md:aspect-[4/3] md:h-auto md:min-h-[10.5rem] md:max-h-[13.5rem] lg:max-h-[15rem]">
-            <div className="flex flex-col items-center justify-center gap-2 px-2 text-pk-navy/35">
-              <IconPackage className="h-12 w-12 sm:h-14 sm:w-14" />
-              <span className="text-center text-xs font-semibold uppercase tracking-wider">
-                Produktbillede
-              </span>
+          <a {...affiliateLinkAttrs} className="block no-underline hover:opacity-95">
+            <div className="relative mx-auto flex h-40 w-full max-w-full items-center justify-center overflow-hidden rounded-2xl border border-pk-blue/10 bg-gradient-to-br from-pk-cream to-white ring-1 ring-black/[0.04] sm:h-44 md:aspect-[4/3] md:h-auto md:min-h-[10.5rem] md:max-h-[13.5rem] lg:max-h-[15rem]">
+              <div className="flex flex-col items-center justify-center gap-2 px-2 text-pk-navy/35">
+                <IconPackage className="h-12 w-12 sm:h-14 sm:w-14" />
+                <span className="text-center text-xs font-semibold uppercase tracking-wider">
+                  Produktbillede
+                </span>
+              </div>
             </div>
-          </div>
+          </a>
         )}
 
         <div className="text-xs text-pk-navy/60">
