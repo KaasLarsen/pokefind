@@ -1,5 +1,6 @@
 import productsData from "../../data/products.json";
 import type { Category } from "./content";
+import { guides } from "./content";
 import {
   isBlockedNonPokemonFranchiseQuery,
   isPokemonProductRecord,
@@ -11,6 +12,24 @@ const productsRaw = productsData as ProductRecord[];
 const products = productsRaw.filter(isPokemonProductRecord);
 
 const productById = new Map(products.map((p) => [p.id, p]));
+
+/** Slå et enkelt produkt op fra den allerede filtrerede Pokémon-liste. */
+export function getProductById(id: string): ProductRecord | undefined {
+  return productById.get(id);
+}
+
+/**
+ * Produkt-IDs vi bør indexere (subset).
+ * I dag er det de produkter som allerede er featured i redaktionelle guides.
+ */
+export function getIndexableProductIds(): string[] {
+  const ids = new Set<string>();
+  for (const g of guides) {
+    for (const id of g.featuredProductIds ?? []) ids.add(id);
+  }
+  // Kun IDs der faktisk findes i vores nuværende products.json.
+  return [...ids].filter((id) => productById.has(id));
+}
 
 /** Hent produkter efter id i samme rækkefølge som angivet (spring over ukendte id’er). */
 export function getProductsByIds(ids: string[]): ProductRecord[] {

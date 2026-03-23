@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { IconBook, IconPackage } from "../../src/components/icons";
 import ProductCard from "../../src/components/ProductCard";
@@ -6,6 +7,12 @@ import { searchCategoriesAndGuides } from "../../src/lib/search";
 import { getFeaturedProducts, searchProducts } from "../../src/lib/searchProducts";
 
 export const dynamic = "force-dynamic";
+export const metadata: Metadata = {
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 export default function SearchPage({
   searchParams,

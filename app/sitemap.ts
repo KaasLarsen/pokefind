@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { categories, guides } from "../src/lib/content";
 import { siteUrl } from "../src/lib/site";
+import { getIndexableProductIds } from "../src/lib/searchProducts";
 
 const base = siteUrl;
 
@@ -39,5 +40,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  return [...staticRoutes, ...guideRoutes, ...categoryRoutes];
+  const productRoutes: MetadataRoute.Sitemap = getIndexableProductIds().map(
+    (id) => ({
+      url: `${base}/product/${encodeURIComponent(id)}`,
+      lastModified: now,
+      changeFrequency: "monthly" as const,
+      priority: 0.45,
+    }),
+  );
+
+  return [...staticRoutes, ...guideRoutes, ...categoryRoutes, ...productRoutes];
 }
