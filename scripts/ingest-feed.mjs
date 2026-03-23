@@ -9,7 +9,9 @@
  *
  * Hvis FEED_URL(S) ikke er sat, læses `data/feeds.json` (liste over jeres partner-feeds).
  *
- * Encoding: feeds er ofte ISO-8859-1; vi læser som latin1 og parser derefter.
+ * Encoding: feeds kan variere (ofte ISO-8859-1 / Windows-1252, men nogle er UTF-8).
+ * Vi prøver først at aflæse `encoding=` fra XML-prologen; ellers vælger vi det decode der
+ * ser mindst ud til at være "mojibake".
  */
 
 import fs from "fs";
@@ -200,6 +202,57 @@ function dedupeById(products) {
   return [...map.values()];
 }
 
+function countChar(s, ch) {
+  let n = 0;
+  for (let i = 0; i < s.length; i++) if (s[i] === ch) n++;
+  return n;
+}
+
+function countMojibakeScore(s) {
+  // Typiske mønstre når UTF-8 er blevet læst som latin1/iso-8859-1 (eller lign.).
+  let score = 0;
+  score += countChar(s, "Ã");
+  score += countChar(s, "â");
+  score += countChar(s, "�"); // replacement char
+
+  const sequences = ["â€", "â€œ", "â€™", "â€“", "â€”", "â€¦", "Â"];
+  for (const seq of sequences) {
+    if (s.includes(seq)) score += 3;
+  }
+
+  return score;
+}
+
+function decodeXmlBuffer(buf) {
+  const head = buf.subarray(0, 2048).toString("ascii");
+  const encMatch = head.match(/encoding=["']([^"']+)["']/i);
+  const encRaw = encMatch?.[1]?.toLowerCase();
+
+  if (encRaw) {
+    // TextDecoder navne er ikke helt 1:1 med XML-encoding, så vi mapper de mest almindelige.
+    let decoderEncoding = "iso-8859-1";
+    if (encRaw.includes("utf-8") || encRaw === "utf8") decoderEncoding = "utf-8";
+    else if (encRaw.includes("windows-1252") || encRaw.includes("cp1252"))
+      decoderEncoding = "windows-1252";
+    else if (
+      encRaw.includes("iso-8859-1") ||
+      encRaw.includes("iso8859-1") ||
+      encRaw.includes("latin1")
+    )
+      decoderEncoding = "iso-8859-1";
+
+    return new TextDecoder(decoderEncoding).decode(buf);
+  }
+
+  // Fallback: prøv både utf-8 og latin1 og vælg "renest" output.
+  const utf8 = new TextDecoder("utf-8", { fatal: false }).decode(buf);
+  const latin1 = new TextDecoder("iso-8859-1", { fatal: false }).decode(buf);
+
+  const utf8Score = countMojibakeScore(utf8);
+  const latin1Score = countMojibakeScore(latin1);
+  return utf8Score <= latin1Score ? utf8 : latin1;
+}
+
 async function main() {
   const entries = collectFeedEntries();
   if (entries.length === 0) {
@@ -222,7 +275,7 @@ async function main() {
     }
 
     const buf = Buffer.from(await res.arrayBuffer());
-    const xml = buf.toString("latin1");
+    const xml = decodeXmlBuffer(buf);
     const mapped = parseFeedXml(xml, label);
     allMapped = allMapped.concat(mapped);
   }
