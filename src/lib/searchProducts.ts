@@ -22,13 +22,23 @@ export function getProductById(id: string): ProductRecord | undefined {
  * Produkt-IDs vi bør indexere (subset).
  * I dag er det de produkter som allerede er featured i redaktionelle guides.
  */
-export function getIndexableProductIds(): string[] {
-  const ids = new Set<string>();
+export function getIndexableProductIds(limit = 200): string[] {
+  const featured = new Set<string>();
   for (const g of guides) {
-    for (const id of g.featuredProductIds ?? []) ids.add(id);
+    for (const id of g.featuredProductIds ?? []) featured.add(id);
   }
-  // Kun IDs der faktisk findes i vores nuværende products.json.
-  return [...ids].filter((id) => productById.has(id));
+
+  const featuredIds = [...featured].filter((id) => productById.has(id));
+
+  // Kvalitets-filter: vi vil primært indexere sider hvor vi har billede og noget tekst.
+  // Det giver bedre odds for at Google vælger dem til resultater i stedet for "thin" pages.
+  const eligible = products
+    .filter((p) => p.imageUrl && p.title.trim().length >= 5 && p.description.trim().length >= 20)
+    .map((p) => p.id)
+    .filter((id) => !featured.has(id));
+
+  const remaining = Math.max(0, limit - featuredIds.length);
+  return [...featuredIds, ...eligible.slice(0, remaining)].slice(0, limit);
 }
 
 /** Hent produkter efter id i samme rækkefølge som angivet (spring over ukendte id’er). */
