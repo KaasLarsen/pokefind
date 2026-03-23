@@ -55,6 +55,60 @@ function normalize(s: string) {
   return s.toLowerCase().trim();
 }
 
+export type HomepageCarouselTheme = "mixed" | "kort" | "lego" | "bamser";
+
+const HOMEPAGE_CAROUSEL_KEYWORDS: Record<HomepageCarouselTheme, string[]> = {
+  // "Mixed" samler alt vi forventer giver god visuel spredning.
+  mixed: [
+    // Kort/format
+    "booster pack",
+    "booster",
+    "etb",
+    "tin",
+    "blister",
+    "sleeves",
+    // LEGO
+    "lego",
+    // Bamser/mjuke dyr
+    "plush",
+    "bamse",
+    "squishmallows",
+  ],
+  kort: ["booster pack", "booster", "etb", "tin", "blister", "sleeves"],
+  lego: ["lego"],
+  bamser: ["plush", "bamse", "squishmallows"],
+};
+
+/**
+ * Produkter til forsiden — let filtrering via nøgleord i title/description.
+ * (Pilot: deterministisk udvælgelse = stabil karusel mellem deploys.)
+ */
+export function getHomepageCarouselProducts({
+  theme = "mixed",
+  limit = 12,
+}: {
+  theme?: HomepageCarouselTheme;
+  limit?: number;
+}): ProductRecord[] {
+  const keywords = HOMEPAGE_CAROUSEL_KEYWORDS[theme] ?? HOMEPAGE_CAROUSEL_KEYWORDS.mixed;
+
+  const normalizedKeywords = keywords.map((k) => normalize(k));
+
+  const eligible = products.filter(
+    (p) =>
+      p.imageUrl &&
+      p.title.trim().length >= 5 &&
+      p.description.trim().length >= 10,
+  );
+
+  const matches = eligible.filter((p) => {
+    const hay = normalize(`${p.title} ${p.description} ${p.merchant} ${p.feedSource}`);
+    return normalizedKeywords.some((k) => k.length >= 2 && hay.includes(k));
+  });
+
+  return matches.slice(0, limit);
+}
+
 const TITLE_STOPWORDS = new Set([
   "pokemon",
   "pokémon",

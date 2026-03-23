@@ -7,12 +7,18 @@ import HowItWorks from "../src/components/HowItWorks";
 import ProductCard from "../src/components/ProductCard";
 import SectionTitle from "../src/components/SectionTitle";
 import TrustStrip from "../src/components/TrustStrip";
+import HomepageProductCarousel from "../src/components/HomepageProductCarousel";
 import { getFeaturedProducts } from "../src/lib/searchProducts";
+import { getHomepageCarouselProducts } from "../src/lib/searchProducts";
 
 export default function HomePage() {
   const topCats = categories.slice(0, 6);
   const topGuides = guides.slice(0, 4);
   const featured = getFeaturedProducts(6);
+  const carouselProducts = getHomepageCarouselProducts({
+    theme: "mixed",
+    limit: 12,
+  });
 
   return (
     <div className="space-y-14 md:space-y-16">
@@ -52,6 +58,15 @@ export default function HomePage() {
             </li>
           ))}
         </ul>
+
+        <div className="mt-8">
+          <HomepageProductCarousel
+            title="Flere Pokémon-produkter"
+            subtitle="Scroll for at se flere (billede og titel linker til produkt-sider)."
+            products={carouselProducts}
+            viewAllHref={`/soeg?q=${encodeURIComponent("pokemon booster lego plush")}`}
+          />
+        </div>
       </section>
 
       <div className="grid gap-8 lg:grid-cols-2">
