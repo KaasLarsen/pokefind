@@ -9,6 +9,8 @@ const nextConfig = {
       { protocol: "https", hostname: "www.festkassen.dk", pathname: "/**" },
       { protocol: "https", hostname: "www.kelz0r.dk", pathname: "/**" },
       { protocol: "https", hostname: "www.shopdyner.dk", pathname: "/**" },
+      { protocol: "https", hostname: "www.proshop.dk", pathname: "/**" },
+      { protocol: "https", hostname: "proshop.dk", pathname: "/**" },
       { protocol: "https", hostname: "www.wouldbe.dk", pathname: "/**" },
       { protocol: "http", hostname: "www.wouldbe.dk", pathname: "/**" },
       { protocol: "https", hostname: "www.nextlevelgames.dk", pathname: "/**" },
