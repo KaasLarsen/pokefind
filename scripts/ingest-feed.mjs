@@ -134,8 +134,11 @@ function normalizeProduct(raw, idx, feedLabel = "partner-ads") {
     str(raw.titel) ||
     str(raw.navn) ||
     `Produkt ${idx + 1}`;
-  const description =
-    str(raw.beskrivelse) || str(raw.description) || "";
+  let description = str(raw.beskrivelse) || str(raw.description) || "";
+  // Hvis feedet slutter midt i en UTF-8-emoji, kan vi efter mixed decode stå tilbage med
+  // et lille mojibake-fragment. Det kan ikke re-konstrueres uden resten af bytes, så vi
+  // fjerner kun det kendte resterende fragment.
+  description = description.replace(/ðŸ/g, "").replace(/\uFFFD/g, "").trim();
   const merchant =
     str(raw.forhandler) || str(raw.brand) || "Ukendt forhandler";
   const affiliateUrl = pickUrl(raw);
