@@ -213,6 +213,9 @@ function countMojibakeScore(s) {
   let score = 0;
   score += countChar(s, "Ã");
   score += countChar(s, "â");
+  // Når UTF-8 emoji bytes (fx ðŸ…) bliver læst som latin1, ender det ofte som `ðŸ`-mønstre.
+  score += countChar(s, "ð");
+  score += countChar(s, "Ÿ");
   score += countChar(s, "�"); // replacement char
 
   const sequences = ["â€", "â€œ", "â€™", "â€“", "â€”", "â€¦", "Â"];
@@ -224,33 +227,60 @@ function countMojibakeScore(s) {
 }
 
 function decodeXmlBuffer(buf) {
-  const head = buf.subarray(0, 2048).toString("ascii");
-  const encMatch = head.match(/encoding=["']([^"']+)["']/i);
-  const encRaw = encMatch?.[1]?.toLowerCase();
+  // Mixed encoding:
+  // Nogle feeds er "iso-8859-1" for bogstaver, men indeholder emoji/UTF-8 bytes.
+  // Vi går derfor buffer'en igennem:
+  // - Hvis der ligger en gyldig UTF-8-sekvens ved positionen, dekoder vi den som UTF-8.
+  // - Ellers dekoder vi den enkelte byte som latin1 (samme byte->codepoint mapping).
 
-  if (encRaw) {
-    // TextDecoder navne er ikke helt 1:1 med XML-encoding, så vi mapper de mest almindelige.
-    let decoderEncoding = "iso-8859-1";
-    if (encRaw.includes("utf-8") || encRaw === "utf8") decoderEncoding = "utf-8";
-    else if (encRaw.includes("windows-1252") || encRaw.includes("cp1252"))
-      decoderEncoding = "windows-1252";
-    else if (
-      encRaw.includes("iso-8859-1") ||
-      encRaw.includes("iso8859-1") ||
-      encRaw.includes("latin1")
-    )
-      decoderEncoding = "iso-8859-1";
+  const decoderLatin1 = new TextDecoder("iso-8859-1", { fatal: false });
+  const decoderUtf8Fatal = new TextDecoder("utf-8", { fatal: true });
 
-    return new TextDecoder(decoderEncoding).decode(buf);
+  function utf8SeqLen(firstByte) {
+    // Returnerer forventet længde hvis byte ser ud som en UTF-8 startbyte (valideres senere af decoder).
+    if ((firstByte & 0xe0) === 0xc0) return 2;
+    if ((firstByte & 0xf0) === 0xe0) return 3;
+    if ((firstByte & 0xf8) === 0xf0) return 4;
+    return 0;
   }
 
-  // Fallback: prøv både utf-8 og latin1 og vælg "renest" output.
-  const utf8 = new TextDecoder("utf-8", { fatal: false }).decode(buf);
-  const latin1 = new TextDecoder("iso-8859-1", { fatal: false }).decode(buf);
+  const outParts = [];
+  let i = 0;
 
-  const utf8Score = countMojibakeScore(utf8);
-  const latin1Score = countMojibakeScore(latin1);
-  return utf8Score <= latin1Score ? utf8 : latin1;
+  while (i < buf.length) {
+    const first = buf[i];
+    const seqLen = utf8SeqLen(first);
+
+    if (seqLen && i + seqLen <= buf.length) {
+      let contOk = true;
+      for (let j = 1; j < seqLen; j++) {
+        if ((buf[i + j] & 0xc0) !== 0x80) {
+          contOk = false;
+          break;
+        }
+      }
+
+      if (contOk) {
+        try {
+          outParts.push(
+            decoderUtf8Fatal.decode(buf.subarray(i, i + seqLen)),
+          );
+          i += seqLen;
+          continue;
+        } catch {
+          // Fald tilbage til latin1 for denne byte.
+        }
+      }
+    }
+
+    // Gruppér non-UTF8-start-bytes for performance (latin1 decode på slices).
+    const start = i;
+    i += 1;
+    while (i < buf.length && utf8SeqLen(buf[i]) === 0) i += 1;
+    outParts.push(decoderLatin1.decode(buf.subarray(start, i)));
+  }
+
+  return outParts.join("");
 }
 
 async function main() {
