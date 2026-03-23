@@ -46,37 +46,23 @@ export function PokeFindLogo({ variant = "wordmark", className = "" }: Props) {
       />
       <circle cx="17" cy="17" r="5" stroke="rgba(255,255,255,0.35)" strokeWidth="1.5" />
       <path d="M26 26l9 9" stroke="#ffcb05" strokeWidth="4" strokeLinecap="round" />
-      {/* Sparkles omkring linsen: tættere på linsen + stærkere glow for at matche coveret */}
-      <g
-        stroke="#ffcb05"
-        strokeWidth="3"
-        strokeLinecap="round"
-        fill="none"
-        opacity="1"
-        filter={`url(#${fid})`}
-      >
-        {/* kardinal-retninger */}
-        <path d="M7 17h6" />
-        <path d="M23 17h10" />
-        <path d="M17 7v6" />
-        <path d="M17 23v10" />
-        {/* diagonaler */}
-        <path d="M10.5 10.5l4 4" />
-        <path d="M19.5 10.5l4 4" />
-        <path d="M10.5 23.5l4-4" />
-        <path d="M19.5 23.5l4-4" />
-        {/* små kryds tæt på kanten */}
-        <path d="M13 6.5l1.5 1.5" />
-        <path d="M21.5 6.5l-1.5 1.5" />
-        <path d="M13 27.5l1.5-1.5" />
-        <path d="M21.5 27.5l-1.5-1.5" />
+      {/* Sparkles/twinkles omkring linsen for at matche brand-stilen */}
+      <g stroke="#ffcb05" strokeWidth="2" strokeLinecap="round" fill="none" opacity="0.95">
+        <path d="M6 17h5" />
+        <path d="M23 17h11" />
+        <path d="M17 6v5" />
+        <path d="M17 23v11" />
+        <path d="M9 10l3 3" />
+        <path d="M22 10l3 3" />
+        <path d="M9 24l3-3" />
+        <path d="M22 24l3-3" />
       </g>
-      <g fill="#7eb8ff" opacity="0.95" filter={`url(#${fid})`}>
-        <circle cx="9" cy="12" r="1.8" />
-        <circle cx="27" cy="9" r="1.8" />
-        <circle cx="32" cy="17" r="1.8" />
-        <circle cx="26" cy="31" r="1.8" />
-        <circle cx="12" cy="31" r="1.8" />
+      <g fill="#7eb8ff" opacity="0.9">
+        <circle cx="7" cy="12" r="1.4" />
+        <circle cx="28" cy="7" r="1.4" />
+        <circle cx="33" cy="17" r="1.4" />
+        <circle cx="25" cy="33" r="1.4" />
+        <circle cx="12" cy="33" r="1.4" />
       </g>
       <path
         fill="#ffffff"
