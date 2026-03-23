@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" fill="none" role="img" aria-labelledby="title">
-  <title id="title">PokÈFind</title>
+  <title id="title">Pok√©Find</title>
   <defs>
     <linearGradient id="pkLens" x1="6" y1="4" x2="28" y2="30" gradientUnits="userSpaceOnUse">
       <stop stop-color="#0c1e3d"/>
@@ -12,9 +12,9 @@
   <!-- Linse -->
   <circle cx="17" cy="17" r="12" fill="url(#pkLens)" stroke="#ffcb05" stroke-width="2" filter="url(#pkSh)"/>
   <circle cx="17" cy="17" r="5" stroke="rgba(255,255,255,0.35)" stroke-width="1.5"/>
-  <!-- HÂndtag -->
+  <!-- H√•ndtag -->
   <path d="M26 26l9 9" stroke="#ffcb05" stroke-width="4" stroke-linecap="round"/>
-  <!-- Bogstav P (geometrisk, ikke PokÈmon-logo) -->
+  <!-- Bogstav P (geometrisk, ikke Pok√©mon-logo) -->
   <path
     fill="#ffffff"
     d="M11.5 11h5.8c3.4 0 5.7 2 5.7 5 0 3-2.3 5-5.8 5h-2.2v6h-3.5V11zm3.5 7.2h2.1c1.9 0 3-1 3-2.5s-1.1-2.5-3-2.5h-2.1v5z"

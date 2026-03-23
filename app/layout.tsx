@@ -29,8 +29,8 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL("https://pokefind.dk"),
   icons: {
-    icon: "/logo-pokefind.svg",
-    apple: "/logo-pokefind.svg",
+    icon: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
   },
   title: "PokéFind — Danmarks Pokémon-købsguide",
   description:
