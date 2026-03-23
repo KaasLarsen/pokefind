@@ -46,6 +46,24 @@ export function PokeFindLogo({ variant = "wordmark", className = "" }: Props) {
       />
       <circle cx="17" cy="17" r="5" stroke="rgba(255,255,255,0.35)" strokeWidth="1.5" />
       <path d="M26 26l9 9" stroke="#ffcb05" strokeWidth="4" strokeLinecap="round" />
+      {/* Sparkles/twinkles omkring linsen for at matche brand-stilen */}
+      <g stroke="#ffcb05" strokeWidth="2" strokeLinecap="round" fill="none" opacity="0.95">
+        <path d="M6 17h5" />
+        <path d="M23 17h11" />
+        <path d="M17 6v5" />
+        <path d="M17 23v11" />
+        <path d="M9 10l3 3" />
+        <path d="M22 10l3 3" />
+        <path d="M9 24l3-3" />
+        <path d="M22 24l3-3" />
+      </g>
+      <g fill="#7eb8ff" opacity="0.9">
+        <circle cx="7" cy="12" r="1.4" />
+        <circle cx="28" cy="7" r="1.4" />
+        <circle cx="33" cy="17" r="1.4" />
+        <circle cx="25" cy="33" r="1.4" />
+        <circle cx="12" cy="33" r="1.4" />
+      </g>
       <path
         fill="#ffffff"
         d="M11.5 11h5.8c3.4 0 5.7 2 5.7 5 0 3-2.3 5-5.8 5h-2.2v6h-3.5V11zm3.5 7.2h2.1c1.9 0 3-1 3-2.5s-1.1-2.5-3-2.5h-2.1v5z"
