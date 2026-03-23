@@ -128,9 +128,6 @@ export default function ProductPage({ params }: { params: { id: string } }) {
               </Link>
             </div>
 
-            <p className="text-xs text-pk-navy/55">
-              Produkter og priser opdateres, når vi kører <code className="rounded bg-pk-navy/5 px-1">npm run ingest:feed</code>.
-            </p>
           </div>
         </div>
       </div>
