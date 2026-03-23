@@ -13,6 +13,8 @@ const nextConfig = {
       { protocol: "https", hostname: "proshop.dk", pathname: "/**" },
       { protocol: "https", hostname: "cdn.shopify.com", pathname: "/**" },
       { protocol: "https", hostname: "image.bog-ide.dk", pathname: "/**" },
+      { protocol: "https", hostname: "content.gucca.dk", pathname: "/**" },
+      { protocol: "https", hostname: "image.legekaeden.dk", pathname: "/**" },
       { protocol: "https", hostname: "www.wouldbe.dk", pathname: "/**" },
       { protocol: "http", hostname: "www.wouldbe.dk", pathname: "/**" },
       { protocol: "https", hostname: "www.nextlevelgames.dk", pathname: "/**" },
